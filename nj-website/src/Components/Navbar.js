@@ -14,7 +14,7 @@ export default function Navbar() {
     ]
 
     return (
-        <nav className="bg-(--dark) shadow-sm fixed w-full z-100">
+        <div className="bg-(--dark) shadow-sm fixed w-full z-100">
             <div className="max-w-[85%] mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between h-16">
                     <div className="flex items-center">
@@ -31,7 +31,7 @@ export default function Navbar() {
                                     selected === menu.name 
                                         ? 'text-gray-900 border-b-2' 
                                         : 'text-gray-500 hover:text-gray-900'
-                                } px-3 py-6 text-sm font-medium hover:border-b-2 transition`}
+                                } px-3 py-6 text-sm font-medium hover:border-b-2 transition tracking-wider`}
                                 onClick={() => setSelection(menu.name)}
                             >
                                 {menu.name}
@@ -48,6 +48,6 @@ export default function Navbar() {
                     </div>
                 </div>
             </div>
-        </nav>
+        </div>
     );
 }
