@@ -2,7 +2,7 @@
 import express from 'express';
 import connectDb from './utils/db.js';
 import projectRoutes from './Routes/routes.project.js';
-import userRoutes from "./Routes/route.user.js";
+import userRoutes from "./Routes/routes.auth.js";
 
 
 const app = express();
