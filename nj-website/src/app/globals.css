@@ -1,10 +1,10 @@
 @import "tailwindcss";
 
-:root {
+/* :root {
   --background: #ffffff;
   --foreground: #171717;
   --primary: #23BEFF;
-}
+} */
 
 @theme inline {
   --color-background: var(--background);
@@ -13,16 +13,67 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --background: #1d1d1d;
     --foreground: #ededed;
 
-  }
+  } 
 }
+    */
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+@theme {
+  /* 🎨 Colors (Light) */
+  --color-primary: #23BEFF;
+  --color-primary-dark: #0D6EFD;
+  --color-primary-light: #E6F9FF;
+
+  --color-accent-yellow: #FFD43B;
+  --color-accent-green: #22C55E;
+  --color-accent-red: #EF4444;
+
+  --color-text-primary: #1A1A1A;
+  --color-text-secondary: #4B5563;
+
+  --color-border: #E5E7EB;
+  --color-background: #F9FBFD;
+  --color-surface: #FFFFFF;
+
+  /* ✍️ Fonts */
+  --font-heading: "Poppins", sans-serif;
+  --font-body: "Inter", sans-serif;
+
+  /* 📐 Radius */
+  --radius-card: 16px;
+  --radius-button: 12px;
+
+  /* 🌑 Shadows */
+  --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+@theme dark {
+  /* 🎨 Colors (Dark) */
+  --color-primary: #23BEFF;
+  --color-primary-dark: #0AA5E9;
+  --color-primary-light: #1A3C4F;
+
+  --color-accent-yellow: #FACC15;
+  --color-accent-green: #16A34A;
+  --color-accent-red: #DC2626;
+
+  --color-text-primary: #F9FAFB;
+  --color-text-secondary: #D1D5DB;
+
+  --color-border: #374151;
+  --color-background: #0F172A; /* Deep navy/gray */
+  --color-surface: #1E293B;   /* Elevated surface */
+
+  /* 🌑 Shadows (slightly stronger for dark) */
+  --shadow-card: 0 4px 16px rgba(0, 0, 0, 0.4);
 }

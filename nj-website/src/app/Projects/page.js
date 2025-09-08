@@ -3,53 +3,36 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import ProjectModal from './Project-Model/page';
+import projectData from '../../../public/projectsData';
 
 const Projects = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedProject, setSelectedProject] = useState({});
-    const projectData = [
-        {
-            id: 1,
-            name: "Project 1",
-            description: "Description for Project 1",
-            img: "/demo-project.svg"
-        },
-        {
-            id: 2,
-            name: "Project 2",
-            description: "Description for Project 2",
-            img: "/demo-project.svg"
-        },
-        {
-            id: 3,
-            name: "Project 3",
-            description: "Description for Project 3",
-            img: "/demo-project.svg"
-        },
-        {
-            id: 4,
-            name: "Project 4",
-            description: "Description for Project 4",
-            img: "/demo-project.svg"
-        }
-    ];
+    
 
     const handleClick = (e,project) => {
         e.preventDefault();
         setIsOpen(true);
-        setSelectedProject([project]);
+        setSelectedProject(project);
+        console.log(project)
         console.log(selectedProject, isOpen);
     }
 
     return (
-        <section className="h-screen px-44 pt-36 -z-100">
+        <section className="h-screen px-44 pt-40 -z-100">
             <div className="w-[100%]">
-                <h1 className="text-4xl font-bold mb-8">Our Projects</h1>
+                <motion.h1 
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5 }}
+                    className="text-4xl font-bold mb-8 relative">Our Projects
+                <div className="absolute w-20 h-1 bg-primary bottom-0 left-0 mt-2"></div>
+                </motion.h1>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {projectData.map((project, index) => (
                         <motion.span 
                             key={project.id} 
-                            onClick={(e,project)=>handleClick(e, project)}
+                            onClick={(e)=>handleClick(e, project)}
                             className="bg-white rounded-lg shadow-lg p-6"
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}

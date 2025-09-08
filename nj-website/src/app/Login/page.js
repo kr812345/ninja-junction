@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Navbar from '@/Components/Navbar';
 import Button from '@/Components/Button';
 import { validateLoginForm } from '@/Components/utils/auth';
+import Image from 'next/image';
 
 export default function Login() {
     const [formData, setFormData] = useState({
@@ -37,9 +38,9 @@ export default function Login() {
 
     return (
         <main className="bg-[var(--dark)] text-[var(--light)]">
-            <Navbar />
             <section className="flex items-center justify-center min-h-[100vh] px-4">
-                <div className="bg-[var(--light)] text-black p-8 rounded-2xl shadow-lg w-full max-w-md">
+                <Image className='fixed -z-10 -rotate-[28deg] top-44 left-170 h-[650px] w-[500px]' src={'./login-graphic.svg'} alt='' width={120} height={120}/>
+                <div className=" bg-primary/40 backdrop-blur-md text-black p-8 rounded-2xl shadow-lg w-full max-w-md">
                     <h2 className="text-3xl font-bold mb-6 text-center gradient-text">Login</h2>
                     <form onSubmit={handleSubmit} className="space-y-4">
                         <div>
@@ -73,12 +74,12 @@ export default function Login() {
                         {error && (
                             <p className="text-red-500 text-sm">{error}</p>
                         )}
-                        <Button type="submit" className="w-full">
+                        <Button type="submit" className="w-full h-10 bg-primary">
                             Login
                         </Button>
                         <p className="text-center text-gray-600 mt-4">
                             Don't have an account?{' '}
-                            <Link href="/Signup" className="text-indigo-600 hover:text-indigo-500">
+                            <Link href="/Signup" className="text-primary hover:text-cyan-600">
                                 Sign up
                             </Link>
                         </p>

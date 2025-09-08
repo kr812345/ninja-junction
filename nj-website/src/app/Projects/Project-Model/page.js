@@ -25,17 +25,17 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+                    className="fixed inset-0 x-[50%] bg-white/70 bg-opacity-50 flex items-center justify-center z-50"
                     onClick={onClose}
                 >
                     <motion.div
                         initial={{ scale: 0.5, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
                         exit={{ scale: 0.5, opacity: 0 }}
-                        className="bg-white rounded-xl p-8 max-w-2xl w-full mx-4 space-y-4"
+                        className=" border border-primary shadow-lg bg-white relative rounded-xl p-8 min-w-6xl w-6xl min-h-[70%] py-8 mx-4 space-y-4 z-10"
                         onClick={e => e.stopPropagation()}
                     >
-                        <img src={project.img} alt={project.name} className="w-full h-64 object-cover rounded-lg" />
+                        <img src={project.img} alt={project.name} className="w-full h-98 object-cover object-top rounded-lg" />
                         <h2 className="text-2xl font-bold">{project.name}</h2>
                         <p className="text-gray-600">{project.longDescription}</p>
                         <div>
