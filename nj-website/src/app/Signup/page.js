@@ -41,7 +41,7 @@ export default function Signup() {
         <main className="bg text-[var(--light)]">
             <Navbar />
             <section className="flex items-center justify-center min-h-[100vh] px-4">
-                <div className="bg-[var(--light)] p-8 rounded-2xl shadow-lg w-full max-w-md">
+                <div className="bg- border border-primary backdrop-blur-md p-8 rounded-2xl shadow-lg w-full max-w-md">
                     <h2 className="text-3xl font-bold mb-6 text-center gradient-text">Sign Up</h2>
                     <form onSubmit={handleSubmit} className="space-y-4">
                         <div>
@@ -103,12 +103,12 @@ export default function Signup() {
                         {error && (
                             <p className="text-red-500 text-sm">{error}</p>
                         )}
-                        <Button type="submit" className="w-full">
+                        <Button type="submit" className="w-full bg-primary">
                             Sign Up
                         </Button>
                         <p className="text-center text-gray-600 mt-4">
                             Already have an account?{' '}
-                            <Link href="/Login" className="text-indigo-600 hover:text-indigo-500">
+                            <Link href="/Login" className="text-primary hover:text-blue-700">
                                 Log in
                             </Link>
                         </p>

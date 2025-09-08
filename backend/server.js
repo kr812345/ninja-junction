@@ -1,16 +1,19 @@
-import express from  'express';
-import connectDb from  './utils/db.js';
+// backend/server.js
+import express from 'express';
+import connectDb from './utils/db.js';
+import projectRoutes from './Routes/routes.project.js';
+import userRoutes from "./Routes/routes.auth.js";
+
 
 const app = express();
+app.use(express.json());
 
-app.get('/',(req,res)=> {
-    res.send('Ninja server is running..');
-})
+app.get('/', (req, res) => res.send('Ninja server is running..'));
+
+// API routes
+app.use('/api/projects', projectRoutes);
+app.use("/api/users", userRoutes);
 
 connectDb();
 
-const port = process.env.PORT || 5000;
-
-app.listen(port, ()=>{
-    console.log(`Ninja server is running at ${port}`)
-})
+const port = process.env.PORT || 3000;
