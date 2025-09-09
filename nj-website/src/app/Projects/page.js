@@ -19,7 +19,7 @@ const Projects = () => {
     }
 
     return (
-        <section className="h-screen px-44 pt-40 -z-100">
+        <section className="h-screen px-44 pt-40 -z-100 not-sm:p-6 not-sm:pt-32">
             <div className="w-[100%]">
                 <motion.h1 
                         initial={{ opacity: 0, y: -20 }}

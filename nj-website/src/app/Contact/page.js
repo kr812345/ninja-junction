@@ -3,7 +3,7 @@ import React from 'react'
 
 const Contact = () => {
     return (
-        <div className="container mx-auto pt-40 py-8 relative">
+        <div className="container mx-auto pt-40 py-8 relative not-sm:pt-32 not-sm:px-4 overflow-clip">
             {/* Decorative circles */}
             <div className="absolute top-20 right-20 left-1/2 w-[400px] h-[400px] bg-primary/40 rounded-full -z-10 blur-xl"></div>
 
@@ -12,9 +12,9 @@ const Contact = () => {
                 <div className="absolute w-20 h-1 bg-primary bottom-0 left-0 mt-2"></div>
             </h1>
             
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="grid md:grid-cols-2 gap-8 not-sm:flex not-sm:flex-col-reverse">
                 <div className="bg-white p-6 rounded-lg shadow-lg border border-blue-100">
-                    <h2 className="text-xl font-semibold mb-4 text-blue-600">Get in Touch</h2>
+                    <h2 className="text-xl font-semibold mb-4 text-primary">Get in Touch</h2>
                     <div className="space-y-4">
                         <p>
                             <strong>Address:</strong><br />
@@ -38,7 +38,7 @@ const Contact = () => {
                     </div>
                 </div>
                 <div className="bg-white p-6 rounded-lg shadow-lg border border-blue-100">
-                    <h2 className="text-xl font-semibold mb-4 text-blue-600">Send us a Message</h2>
+                    <h2 className="text-xl font-semibold mb-4 text-primary">Send us a Message</h2>
                     <form className="space-y-4">
                         <div>
                             <input
@@ -62,7 +62,7 @@ const Contact = () => {
                         </div>
                         <button
                             type="submit"
-                            className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700"
+                            className="bg-primary text-white px-6 py-2 rounded hover:bg-blue-700"
                         >
                             Send Message
                         </button>

@@ -10,7 +10,7 @@ export default function Hero() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
             id="home" 
-            className="h-screen bg-white flex items-center pb-12 md:pt-32 md:pb-20"
+            className="h-screen bg-white flex items-center pb-12 not-md:pt-40 md:pb-20 "
         >
             <div className="max-w-[85%] mx-auto sm:px-6 lg:px-8">
                 <div className="lg:grid lg:grid-cols-12 lg:gap-8">
@@ -20,12 +20,12 @@ export default function Hero() {
                         transition={{ duration: 0.6, delay: 0.2 }}
                         className="flex flex-col space-y-1 sm:text-center md:max-w-2xl lg:col-span-6 lg:text-left"
                     >
-                        <h1 className="text-6xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
+                        <h1 className="text-6xl tracking-tight font-extrabold text-gray-900 md:text-6xl">
                             <motion.span 
                                 initial={{ y: 20, opacity: 0 }}
                                 animate={{ y: 0, opacity: 1 }}
                                 transition={{ duration: 0.6, delay: 0.3 }}
-                                className="block text-7xl"
+                                className="block text-7xl not-sm:text-4xl "
                             >
                                 Collaborate.
                             </motion.span>
@@ -33,7 +33,7 @@ export default function Hero() {
                                 initial={{ y: 20, opacity: 0 }}
                                 animate={{ y: 0, opacity: 1 }}
                                 transition={{ duration: 0.6, delay: 0.5 }}
-                                className="text-7xl"
+                                className="block text-7xl not-sm:text-4xl "
                             >
                                 Contribute. Create.
                             </motion.span>
@@ -41,7 +41,7 @@ export default function Hero() {
                                 initial={{ y: 20, opacity: 0 }}
                                 animate={{ y: 0, opacity: 1 }}
                                 transition={{ duration: 0.6, delay: 0.7 }}
-                                className="block gradient-text text-7xl"
+                                className="block gradient-text text-7xl not-sm:text-4xl "
                             >
                                 Innovate Together.
                             </motion.span>
@@ -50,7 +50,7 @@ export default function Hero() {
                             initial={{ y: 20, opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
                             transition={{ duration: 0.6, delay: 0.9 }}
-                            className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0"
+                            className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg not-sm:tracking-tight sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0"
                         >
                             The ultimate platform for students to find collaborators, share ideas, and work on projects
                             together. Connect with like-minded peers across disciplines.
@@ -77,10 +77,10 @@ export default function Hero() {
                         initial={{ x: 50, opacity: 0 }}
                         animate={{ x: 0, opacity: 1 }}
                         transition={{ duration: 0.6, delay: 0.4 }}
-                        className="mt-12 relative lg:mt-0 lg:col-span-6 flex justify-center"
+                        className="mt-12 relative lg:mt-0 lg:col-span-6 flex justify-center not-sm:mt-8"
                     >
-                        <div className="relative mx-auto bg-primary w-[80%] rounded-lg shadow-lg overflow-hidden">
-                            <div className="gradient-bg h-full w-full p-2">
+                        <div className="relative mx-auto bg-primary w-[80%] rounded-lg shadow-lg overflow-hidden not-sm:w-[100%] not-sm:h-[200px]">
+                            <div className="gradient-bg h-full w-full p-2 not-sm:p-1">
                                 <div className="bg-white rounded-t-lg p-4">
                                     <div className="flex space-x-2">
                                         <div className="w-3 h-3 rounded-full bg-red-500"></div>
@@ -101,14 +101,14 @@ export default function Hero() {
                                     rotate: [0, 5, -5, 0],
                                     transition: { duration: 5, repeat: Infinity }
                                 }}
-                                className="absolute -bottom-8 -left-8 bg-blue-100 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-20 rounded- w-32 h-32 z-0"
+                                className="absolute -bottom-8 -left-8 bg-blue-100 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-20 rounded- w-32 h-32 z-0 not-sm:w-22 not-sm:h-22"
                             />
                             <motion.div 
                                 animate={{ 
                                     rotate: [0, -5, 5, 0],
                                     transition: { duration: 5, repeat: Infinity }
                                 }}
-                                className="absolute -top-8 -right-8 bg-gray-200 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-20 rounded- w-32 h-32 z-0"
+                                className="absolute -top-8 -right-8 bg-gray-200 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-20 rounded- w-32 h-32 z-0 not-sm:w-22 not-sm:h-22"
                             />
                         </div>
                     </motion.div>
