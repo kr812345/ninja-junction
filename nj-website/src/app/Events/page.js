@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 export default function Events() {
     return (
         <main className="font-sans min-h-screen">
-            <section className="pt-40 pb-16 px-44">
+            <section className="pt-40 pb-16 px-44 not-sm:px-4 not-sm:pt-32">
                 <div className="">
                     <motion.h2 
                         initial={{ opacity: 0, y: -20 }}

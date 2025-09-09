@@ -1,9 +1,10 @@
 'use client';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 
 export default function Navbar() {
-    const [selected, setSelection] = useState('Home');
+    const [selected, setSelection] = useState('');
 
     const menus = [
         {name: 'Home', link: '/'},
@@ -21,12 +22,22 @@ export default function Navbar() {
     }, []);
 
     return (
-        <div className=" shadow-sm fixed w-full z-[10000]">
-            <div className="max-w-[85%] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-white shadow-sm fixed w-full z-[10000]">
+            <div className="max-w-[85%] mx-auto px-4 sm:px-6 lg:px-8 not-sm:max-w-[98%]">
                 <div className="flex justify-between h-16">
-                    <div className="flex items-center">
-                        <div className="flex-shrink-0 flex items-center">
-                            <h1 className="text-xl text-primary font-bold gradient-text">Ninja Junction</h1>
+                    <div className="flex">
+                        <div className="flex-shrink-0 flex items-">
+                            {/* <h1 className="text-xl font-bold gradient-text"> */}
+                            <Link href={'/'}>
+                                <Image
+                                        src="./logo-bg.svg"
+                                        alt="Ninja Junction Collaboration"
+                                        width={24}
+                                        height={24}
+                                        className="object-fit  w-full h-full"
+                                        />  
+                            </Link>
+                                    {/* </h1> */}
                         </div>
                     </div>
                     <div className="hidden md:ml-6 md:flex md:items-center md:space-x-8">
