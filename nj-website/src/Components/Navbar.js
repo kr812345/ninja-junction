@@ -2,13 +2,18 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
+import { IoIosMenu } from "react-icons/io";
+import { IoCloseOutline } from "react-icons/io5";
+import { motion } from 'motion/react';
+import { useRouter } from 'next/navigation';
 
 export default function Navbar() {
     const [selected, setSelection] = useState('');
-
+    const [IsVisible, setIsVisible] = useState(false); 
+    const Router = useRouter();
     const menus = [
         {name: 'Home', link: '/'},
-        {name: 'Projects', link: '/Projects'},
+        // {name: 'Projects', link: '/Projects'},
         {name: 'Events', link: '/Events'},
         {name: 'Contact', link: '/Contact'},
         {name: 'About', link: '/About'},
@@ -20,6 +25,18 @@ export default function Navbar() {
             setSelection(currentMenu.name);
         }
     }, []);
+
+    const handleMenu = (e) => {
+        e.preventDefault();
+        setIsVisible(p=>!p);
+    } 
+
+    const handleSelection = (e, menu) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setSelection(menu.name);
+        // setIsVisible(p=>!p);
+    }
 
     return (
         <div className="bg-white shadow-sm fixed w-full z-[10000]">
@@ -50,13 +67,57 @@ export default function Navbar() {
                                         ? 'text-gray-900 border-b-2' 
                                         : 'text-gray-500 hover:text-gray-900'
                                 } px-3 py-6 text-sm font-medium hover:border-b-2 transition tracking-wider`}
-                                onClick={() => setSelection(menu.name)}
+                                onClick={() => setSelection(menu)}
                             >
                                 {menu.name}
                             </Link>
                         ))}
                     </div>
-                    <div className="flex items-center">
+                    <div className='md:hidden'>
+                        <div className='h-full w-fit flex items-center justify-center'>
+                            { IsVisible ? <IoCloseOutline onClick={e=>handleMenu(e)} className='text-4xl' /> : <IoIosMenu onClick={e=>handleMenu(e)} className='text-4xl'/>
+                            }
+                        </div>
+                        {IsVisible && <div className='fixed left-0 h-fit w-screen'>
+                                        <motion.ul 
+                                            initial={{ opacity: 0, y: -20 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            exit={{ opacity: 0, y: -20 }}
+                                            className=" flex flex-col bg-gray-100/40 h-screen p-4"
+                                            onClick={(e)=>handleMenu(e)}
+                                            >
+                                            {menus.map((menu,i) => (
+                                                <motion.li
+                                                key={menu.name}  
+                                                custom={i}
+                                                variants={{
+                                                    visible: (i) => ({
+                                                        opacity: 1,
+                                                        delay: 0.2,
+                                                        transition: i*0.1
+                                                    })
+                                                }}
+                                                initial="hidden"
+                                                animate="visible"
+                                                exit="exit"
+                                                // className="p-2 rounded-md bg-white shadow"
+                                                className={`nav-link ${
+                                                selected === menu.name 
+                                                ? 'text-gray-900 border-b-2' 
+                                                : 'text-gray-500 hover:text-gray-900'
+                                                } px-4 py-6 text-md font-medium hover:border-b-2 transition tracking-wider bg-gray-100`}
+                                                onClick={(e) => handleSelection(e, menu.name)}
+                                                >
+                                                    <Link href={menu.link} className=''>
+                                                    {menu.name}
+                                                    </Link>
+                                            </motion.li>
+                                                
+                                            ))}
+                                        </motion.ul>
+                                      </div>}
+                    </div>
+                    <div className="flex items-center not-sm:hidden">
                         <Link href="/Login" className="text-gray-900 hover:text-primary px-3 py-2 text-sm font-medium">
                             Login
                         </Link>
