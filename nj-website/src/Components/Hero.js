@@ -62,14 +62,14 @@ export default function Hero() {
                             className="mt-8 sm:max-w-lg sm:mx-auto sm:text-center lg:text-left lg:mx-0"
                         >
                             <div className="flex flex-col space-y-3 sm:flex-row sm:space-y-0 sm:space-x-3">
-                                <Link href="/Signup"
+                                <Link href="/Contact"
                                     className="gradient-bg font-semibold text-white bg-primary px-9 py-3 rounded-md text-base hover:bg-opacity-90 transition w-full sm:w-auto text-center">
-                                    Get Started
+                                    Join Us
                                 </Link>
-                                <Link href="/Projects"
+                                {/* <Link href="/Projects"
                                     className="text-primary px-6 py-3 rounded-md text-base font-medium border border-primary hover:bg-gray-50 transition sm:w-auto text-center">
                                     Explore Projects
-                                </Link>
+                                </Link> */}
                             </div>
                         </motion.div>
                     </motion.div>

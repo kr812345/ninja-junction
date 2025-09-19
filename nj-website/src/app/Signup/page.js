@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Navbar from '@/Components/Navbar';
 import Button from '@/Components/Button';
 import { validateSignupForm } from '@/Components/utils/auth';
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function Signup() {
     const [formData, setFormData] = useState({
@@ -25,7 +26,8 @@ export default function Signup() {
         }
 
         // TODO: Implement signup logic
-        console.log('Form submitted:', formData);
+        // console.log('Form submitted:', formData);
+        toast.success('Coming Soon.')
     };
 
     const handleChange = (e) => {
@@ -115,6 +117,7 @@ export default function Signup() {
                     </form>
                 </div>
             </section>
+                <Toaster position='top-center' reverseOrder={false}/>
         </main>
     );
 }
