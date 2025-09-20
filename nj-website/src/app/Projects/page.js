@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import ProjectModal from './Project-Model/page';
+import ProjectModal from './ProjectModel/page';
 import projectData from '../../../public/projectsData';
 
 const Projects = () => {

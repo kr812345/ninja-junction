@@ -5,6 +5,9 @@ import Button from '@/Components/Button';
 import { validateLoginForm } from '@/Components/utils/auth';
 import { motion } from 'motion/react';
 import Image from 'next/image';
+import AuthService from '@/Services/auth';
+import toast, { Toaster } from 'react-hot-toast';
+
 
 export default function Login() {
     const [formData, setFormData] = useState({
@@ -24,7 +27,10 @@ export default function Login() {
         }
 
         // TODO: Implement login logic
-        console.log('Form submitted:', formData);
+        // console.log('Form submitted:', formData);
+        // const res = AuthService.login(formData.email, formData.password);
+        // console.log(res);
+        toast.success('Coming Soon.')
     };
 
     const handleChange = (e) => {
@@ -88,7 +94,7 @@ export default function Login() {
                         {error && (
                             <p className="text-red-500 text-sm">{error}</p>
                         )}
-                        <Button type="submit" className="w-full h-10 mt-4 bg-primary hover:shadow-md hover:scale-101">
+                        <Button type="submit" onClick={handleSubmit} className="w-full h-10 mt-4 bg-primary hover:shadow-md hover:scale-101">
                             Login
                         </Button>
                         <p className="text-center text-gray-600 mt-4">
@@ -100,6 +106,7 @@ export default function Login() {
                     </motion.form>
                 </motion.div>
             </section>
+            {/* <Toaster position='top-center' reverseOrder={false}/> */}
         </main>
     );
 }

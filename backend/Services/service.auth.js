@@ -24,5 +24,5 @@ export const loginUser = async ({ email, password }) => {
     { expiresIn: "7d" }
   );
 
-  return { user, token };
+  return { user: user, token: token };
 };
