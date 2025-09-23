@@ -254,14 +254,14 @@ export default function Navbar() {
                                         </motion.ul>
                                       </div>}
                     </div>
-                    <div className="flex items-center not-sm:hidden">
+                    {/* <div className="flex items-center not-sm:hidden">
                         <Link href="/Login" className="text-gray-900 hover:text-primary px-3 py-2 text-sm font-medium">
                             Login
                         </Link>
                         <Link href="/Signup" className="text-white ml-4 gradient-bg bg-primary border border-primary px-4 py-2 rounded-md text-sm font-medium hover:bg-opacity-90 transition">
                             Sign Up
                         </Link>
-                    </div>
+                    </div> */}
                 </div>
             </div>
             <Toaster position='top-center' reverseOrder={false}/>

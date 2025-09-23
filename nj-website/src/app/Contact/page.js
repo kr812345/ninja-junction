@@ -73,7 +73,7 @@ const Contact = () => {
                             <h2 className="text-xl lg:text-2xl font-bold mb-4 lg:mb-6 text-primary">Contact Information</h2>
                             
                             <div className="space-y-4 lg:space-y-6">
-                                <motion.div 
+                                {/* <motion.div 
                                     whileHover={{ scale: 1.02 }}
                                     className="flex items-start space-x-3 lg:space-x-4 p-3 lg:p-4 rounded-xl hover:bg-gray-50 transition-colors"
                                 >
@@ -86,7 +86,7 @@ const Contact = () => {
                                         <h3 className="font-semibold text-gray-900 text-sm lg:text-base">Phone</h3>
                                         <p className="text-gray-600 text-sm lg:text-base">(+91) 84487 24342</p>
                                     </div>
-                                </motion.div>
+                                </motion.div> */}
 
 
                                 <motion.div 
@@ -100,11 +100,11 @@ const Contact = () => {
                                     </div>
                                     <div className="min-w-0">
                                         <h3 className="font-semibold text-gray-900 text-sm lg:text-base">Email</h3>
-                                        <p className="text-gray-600 text-sm lg:text-base break-all">Coming Soon.</p>
+                                        <p className="text-gray-600 text-sm lg:text-base break-all">team.ninjajunction@protonmail.com</p>
                                     </div>
                                 </motion.div>
 
-                                <motion.div 
+                                {/* <motion.div 
                                     whileHover={{ scale: 1.02 }}
                                     className="flex items-start space-x-3 lg:space-x-4 p-3 lg:p-4 rounded-xl hover:bg-gray-50 transition-colors"
                                 >
@@ -118,7 +118,7 @@ const Contact = () => {
                                         <h3 className="font-semibold text-gray-900 text-sm lg:text-base">Address</h3>
                                         <p className="text-gray-600 text-sm lg:text-base">Coming Soon.</p>
                                     </div>
-                                </motion.div>
+                                </motion.div> */}
 
                                 {/* <motion.div 
                                     whileHover={{ scale: 1.02 }}
