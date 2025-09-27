@@ -2,7 +2,7 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
 // If no API base URL is configured, fall back to Next.js local API route during dev.
 const CONTACT_ENDPOINT = (API_BASE_URL && API_BASE_URL.trim() !== '')
-  ? `${API_BASE_URL}/contacts`
+  ? `${API_BASE_URL}/api/contacts`
   : '/api/contacts';
 
 const contactForm = {
