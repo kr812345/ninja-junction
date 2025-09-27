@@ -8,6 +8,7 @@ import connectDb from './utils/db.js';
 import projectRoutes from './Routes/routes.project.js';
 import userRoutes from "./Routes/routes.auth.js";
 import contactRoutes from "./Routes/routes.contact.js";
+import memberRoutes from "./Routes/routes.member.js";
 import { errorHandler, notFound } from './middleware/errorHandler.js';
 import { generalRateLimit } from './middleware/rateLimiter.js';
 
@@ -51,6 +52,7 @@ app.get('/', (req, res) => res.send('Ninja server is running..'));
 app.use('/api/projects', projectRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/contacts", contactRoutes);
+app.use("/api/members", memberRoutes);
 
 // Error handling middleware (must be after routes)
 app.use(notFound);
