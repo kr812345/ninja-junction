@@ -1,4 +1,4 @@
-const BASE_URL = `${process.env.NEXT_PUBLIC_API_URL}api/members`;
+const BASE_URL = `${process.env.NEXT_PUBLIC_API_URL}/api/members`;
 
 /**
  * Submits a new membership application.
