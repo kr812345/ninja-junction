@@ -207,3 +207,55 @@ export const validateQueryParams = (req, res, next) => {
 
   next();
 };
+
+// Validate member creation data
+export const validateMemberCreation = (req, res, next) => {
+  const { name, email, university, program, year, skills, interests, github, linkedin, reason } = req.body;
+  const errors = [];
+
+  // Required fields
+  if (!name || typeof name !== 'string' || name.trim().length === 0) errors.push('Name is required.');
+  if (!email || typeof email !== 'string' || !/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email)) errors.push('A valid email is required.');
+  if (!university || typeof university !== 'string' || university.trim().length === 0) errors.push('University/College is required.');
+  if (!program || typeof program !== 'string' || program.trim().length === 0) errors.push('Program is required.');
+  if (!year || typeof year !== 'string' || year.trim().length === 0) errors.push('Year is required.');
+  if (!reason || typeof reason !== 'string' || reason.trim().length === 0) errors.push('Reason to join is required.');
+
+  // Optional fields validation
+  if (github && !/^https?:\/\/(?:www\.)?github\.com\/[A-z0-9_-]+$/.test(github)) errors.push('Invalid GitHub URL.');
+  if (linkedin && !/^https?:\/\/(?:www\.)?linkedin\.com\/in\/[A-z0-9_-]+\/?$/.test(linkedin)) errors.push('Invalid LinkedIn URL.');
+
+  if (errors.length > 0) {
+    return res.status(400).json({ success: false, message: 'Validation failed', errors });
+  }
+
+  // Trim and sanitize
+  req.body.name = name.trim();
+  req.body.email = email.trim().toLowerCase();
+  req.body.university = university.trim();
+  req.body.program = program.trim();
+  req.body.year = year.trim();
+  req.body.reason = reason.trim();
+  if (skills) req.body.skills = skills.trim();
+  if (interests) req.body.interests = interests.trim();
+  if (github) req.body.github = github.trim();
+  if (linkedin) req.body.linkedin = linkedin.trim();
+
+  next();
+};
+
+// Validate member status update
+export const validateMemberStatusUpdate = (req, res, next) => {
+  const { status } = req.body;
+  const validStatuses = ['pending', 'reviewed', 'accepted', 'rejected'];
+
+  if (!status || !validStatuses.includes(status)) {
+    return res.status(400).json({ 
+      success: false, 
+      message: 'Validation failed', 
+      errors: [`Status must be one of: ${validStatuses.join(', ')}`]
+    });
+  }
+
+  next();
+};

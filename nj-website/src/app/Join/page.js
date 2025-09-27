@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import { motion } from 'motion/react'
-import contactForm from '@/Services/Contact'
+import { submitApplication } from '../../Services/Join'
 import toast, { Toaster } from 'react-hot-toast'
 
 export default function Join() {
@@ -30,24 +30,13 @@ export default function Join() {
     e.preventDefault()
     setSubmitting(true)
     try {
-      // Reuse the existing contact endpoint by composing a membership message
-      const membershipMessage = `Membership request\n\n` +
-        `Name: ${formData.name}\n` +
-        `Email: ${formData.email}\n` +
-        `University/College: ${formData.university}\n` +
-        `Program: ${formData.program}\n` +
-        `Year: ${formData.year}\n` +
-        `Skills: ${formData.skills}\n` +
-        `Interests: ${formData.interests}\n` +
-        `GitHub: ${formData.github}\n` +
-        `LinkedIn: ${formData.linkedin}\n` +
-        `Reason to join: ${formData.reason}`
+      const res = await submitApplication(formData)
 
-      const res = await contactForm.create({
-        name: formData.name,
-        email: formData.email,
-        message: membershipMessage,
-      })
+      if (res.success === false) {
+        // Handle validation errors from the backend
+        const errorMessage = res.errors ? res.errors.join(', ') : res.message
+        throw new Error(errorMessage)
+      }
 
       toast.success(res?.message || 'Application submitted! We will get back to you soon.')
       setFormData({
@@ -250,7 +239,7 @@ export default function Join() {
         </motion.div>
       </div>
 
-      <Toaster position="top-center" reverseOrder={false} />
+      {/* <Toaster position="top-center" reverseOrder={false} /> */}
     </div>
   )
 }
