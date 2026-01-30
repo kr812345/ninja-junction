@@ -30,15 +30,15 @@ const Contact = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
+        <div className="min-h-screen bg-[var(--color-background)] relative overflow-hidden">
             {/* Animated background elements */}
-            <motion.div 
+            <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 1, delay: 0.2 }}
                 className="absolute top-20 right-20 w-[300px] h-[300px] bg-primary/20 rounded-full -z-10 blur-2xl sm:w-[200px] sm:h-[200px] sm:top-10 sm:right-10"
             />
-            <motion.div 
+            <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 1, delay: 0.4 }}
@@ -60,7 +60,7 @@ const Contact = () => {
                         Have questions or want to collaborate? We'd love to hear from you!
                     </p>
                 </motion.div>
-                
+
                 <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 max-w-6xl mx-auto">
                     {/* Contact Information */}
                     <motion.div
@@ -71,7 +71,7 @@ const Contact = () => {
                     >
                         <div className="bg-white/80 backdrop-blur-sm p-6 lg:p-8 rounded-2xl shadow-xl border border-primary/10">
                             <h2 className="text-xl lg:text-2xl font-bold mb-4 lg:mb-6 text-primary">Contact Information</h2>
-                            
+
                             <div className="space-y-4 lg:space-y-6">
                                 {/* <motion.div 
                                     whileHover={{ scale: 1.02 }}
@@ -89,7 +89,7 @@ const Contact = () => {
                                 </motion.div> */}
 
 
-                                <motion.div 
+                                <motion.div
                                     whileHover={{ scale: 1.02 }}
                                     className="flex items-start space-x-3 lg:space-x-4 p-3 lg:p-4 rounded-xl hover:bg-gray-50 transition-colors"
                                 >
@@ -224,7 +224,7 @@ const Contact = () => {
                     </motion.div>
                 </div>
             </div>
-                            <Toaster position="top-center" reverseOrder={false} />
+            <Toaster position="top-center" reverseOrder={false} />
         </div>
     )
 }

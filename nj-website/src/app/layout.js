@@ -1,18 +1,21 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Merriweather } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/Components/Navbar";
 import ScrollNavigator from "@/Components/ScrollNavigator";
-import PageTransition from "@/Components/PageTransition";
+import LoadingScreen from "@/Components/LoadingScreen";
 import { Toaster } from "react-hot-toast";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
   subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const merriweather = Merriweather({
+  weight: ["300", "400", "700", "900"],
   subsets: ["latin"],
+  variable: "--font-merriweather",
+  display: "swap",
 });
 
 export const metadata = {
@@ -22,17 +25,19 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
-        <Navbar/>
+        suppressHydrationWarning
+        className={`${inter.variable} ${merriweather.variable} antialiased font-sans`}
+      >
+        <LoadingScreen>
+          <Navbar />
           <ScrollNavigator>
             {/* <PageTransition> */}
-              {children}
+            {children}
             {/* </PageTransition> */}
           </ScrollNavigator>
+        </LoadingScreen>
       </body>
     </html>
   );

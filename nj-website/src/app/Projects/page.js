@@ -8,9 +8,9 @@ import projectData from '../../../public/projectsData';
 const Projects = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedProject, setSelectedProject] = useState({});
-    
 
-    const handleClick = (e,project) => {
+
+    const handleClick = (e, project) => {
         e.preventDefault();
         setIsOpen(true);
         setSelectedProject(project);
@@ -19,25 +19,25 @@ const Projects = () => {
     }
 
     return (
-        <section className="h-screen px-44 pt-40 -z-100 not-sm:p-6 not-sm:pt-32">
+        <section className="min-h-screen bg-[var(--color-background)] px-44 pt-40 -z-100 not-sm:p-6 not-sm:pt-32">
             <div className="w-[100%]">
-                <motion.h1 
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5 }}
+                <motion.h1
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
                     className="text-4xl font-bold mb-8 relative">Our Projects
-                <div className="absolute w-20 h-1 bg-primary bottom-0 left-0 mt-2"></div>
+                    <div className="absolute w-20 h-1 bg-primary bottom-0 left-0 mt-2"></div>
                 </motion.h1>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {projectData.map((project, index) => (
-                        <motion.span 
-                            key={project.id} 
-                            onClick={(e)=>handleClick(e, project)}
+                        <motion.span
+                            key={project.id}
+                            onClick={(e) => handleClick(e, project)}
                             className="bg-white rounded-lg shadow-lg p-6"
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5, delay: index * 0.1 }}
-                            whileHover={{ 
+                            whileHover={{
                                 scale: 1.05,
                                 boxShadow: "0px 10px 20px rgba(0,0,0,0.2)"
                             }}
@@ -54,11 +54,11 @@ const Projects = () => {
                         </motion.span>
                     ))}
                 </div>
-            {isOpen && <ProjectModal 
-                project={selectedProject}
-                isOpen={!!selectedProject}
-                onClose={() => {setSelectedProject(null); setIsOpen(p=>!p)}}
-            />}
+                {isOpen && <ProjectModal
+                    project={selectedProject}
+                    isOpen={!!selectedProject}
+                    onClose={() => { setSelectedProject(null); setIsOpen(p => !p) }}
+                />}
             </div>
         </section>
     );
