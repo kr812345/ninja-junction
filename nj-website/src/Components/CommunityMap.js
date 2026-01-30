@@ -1,6 +1,7 @@
 'use client';
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState, useEffect, useMemo } from 'react';
+import Image from 'next/image';
 
 export default function CommunityMap() {
     const ref = useRef(null);
@@ -38,26 +39,24 @@ export default function CommunityMap() {
     // Generate deterministic positions for community spots
     const spots = useMemo(() => {
         const generatedSpots = [];
-        const colors = ['#2563EB', '#8B5CF6', '#06B6D4', '#3B82F6'];
+        // Premium monochromatic colors - electric blue theme
+        const colors = ['#00D4FF', '#0099CC', '#00B8E6', '#33DDFF'];
 
         for (let i = 0; i < totalMembers; i++) {
-            // Constrain spots to be within map boundaries (25-75% range for tighter fit)
-            const x = seededRandom(i * 1.5) * 50 + 25; // 25-75 range
-            const y = seededRandom(i * 2.7) * 50 + 25; // 25-75 range
-            const size = seededRandom(i * 3.3) * 3 + 3; // Larger dots (3-6 range)
+            const x = seededRandom(i * 1.5) * 50 + 25;
+            const y = seededRandom(i * 2.7) * 50 + 25;
+            const size = seededRandom(i * 3.3) * 3 + 3;
 
             generatedSpots.push({
                 id: i,
-                // Use strings to ensure exact server-client matching
                 x: x.toFixed(10),
                 y: y.toFixed(10),
                 delay: i * 0.02,
                 size: size.toFixed(10),
-                // Pre-calculate and store as strings to avoid hydration errors
                 outerRadius: (size / 6).toFixed(10),
                 innerRadius: (size / 12).toFixed(10),
-                mainRadius: (size / 25).toFixed(10),
-                color: colors[Math.floor(seededRandom(i * 4.1) * 4)]
+                mainRadius: (size / 24).toFixed(10),
+                color: colors[i % colors.length]
             });
         }
         return generatedSpots;
@@ -65,9 +64,18 @@ export default function CommunityMap() {
 
     return (
         <section ref={ref} className="relative py-24 bg-[var(--color-background)] overflow-hidden">
-            {/* Background Effects */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-600/10 rounded-full blur-[150px] -z-10" />
-            <div className="absolute top-0 right-1/4 w-[400px] h-[400px] bg-purple-600/10 rounded-full blur-[120px] -z-10" />
+            {/* Tech Grid Background */}
+            <div className="absolute inset-0 opacity-[0.02]" style={{
+                backgroundImage: `
+                    linear-gradient(var(--color-primary) 1px, transparent 1px),
+                    linear-gradient(90deg, var(--color-primary) 1px, transparent 1px)
+                `,
+                backgroundSize: '50px 50px'
+            }} />
+
+            {/* Ambient Glows */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-cyan-400/10 rounded-full blur-[150px] -z-10" />
+            <div className="absolute top-0 right-1/4 w-[400px] h-[400px] bg-purple-600/15 rounded-full blur-[120px] -z-10" />
 
             <div className="max-w-7xl mx-auto px-6 lg:px-8">
                 {/* Section Header */}
@@ -77,7 +85,7 @@ export default function CommunityMap() {
                     transition={{ duration: 0.6 }}
                     className="text-center mb-16"
                 >
-                    <h2 className="text-4xl lg:text-5xl font-bold text-[var(--color-text-primary)] font-serif mb-4">
+                    <h2 className="text-4xl lg:text-5xl font-bold text-[var(--color-text-primary)] mb-4" style={{ letterSpacing: '-0.02em' }}>
                         Our Growing <span className="text-[var(--color-primary)]">Community</span>
                     </h2>
                     <p className="text-lg text-[var(--color-text-secondary)] max-w-2xl mx-auto">
@@ -94,158 +102,180 @@ export default function CommunityMap() {
                         transition={{ duration: 0.8, delay: 0.2 }}
                         className="lg:col-span-3 relative"
                     >
-                        <div className="relative bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 rounded-3xl border border-slate-200 p-8 lg:p-12 overflow-hidden shadow-2xl">
-                            {/* Subtle overlay */}
-                            <div className="absolute inset-0 bg-white/30" />
+                        <div className="relative bg-slate-700/40 backdrop-blur-xl rounded-3xl border border-cyan-400/30 p-8 lg:p-12 overflow-hidden">
+                            {/* Delhi Map with Dark Overlay */}
+                            <Image
+                                src="/Delhi Map Outline.png"
+                                alt="Delhi University Map"
+                                width={600}
+                                height={600}
+                                className="w-full h-auto opacity-30 grayscale"
+                                priority
+                                quality={90}
+                            />
 
-                            {/* Delhi Map Container */}
-                            <div className="relative w-full aspect-[5/6]">
-                                {/* Delhi Map Image */}
-                                <motion.img
-                                    src="/Delhi Map Outline.png"
-                                    alt="Delhi Map"
-                                    className="w-full h-full object-contain relative z-10"
-                                    style={{
-                                        filter: 'drop-shadow(0 0 10px rgba(0, 0, 0, 0.1))'
-                                    }}
-                                    initial={{ opacity: 0, scale: 0.95 }}
-                                    animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                                    transition={{ duration: 1.5, ease: "easeOut" }}
-                                />
+                            {/* Community Spots Overlay */}
+                            <svg
+                                className="absolute inset-0 w-full h-full"
+                                viewBox="0 0 100 100"
+                                preserveAspectRatio="none"
+                                suppressHydrationWarning
+                            >
+                                {spots.map((spot) => (
+                                    <motion.g key={spot.id} suppressHydrationWarning>
+                                        {/* Outer glow ring */}
+                                        <motion.circle
+                                            cx={String(spot.x)}
+                                            cy={String(spot.y)}
+                                            r={String(spot.outerRadius)}
+                                            fill={spot.color}
+                                            opacity="0.2"
+                                            initial={{ scale: 0, opacity: 0 }}
+                                            animate={isInView ? {
+                                                scale: [0, 2, 1.5],
+                                                opacity: [0, 0.4, 0.2]
+                                            } : {}}
+                                            transition={{
+                                                duration: 1.2,
+                                                delay: spot.delay,
+                                                repeat: Infinity,
+                                                repeatDelay: 1.5
+                                            }}
+                                            suppressHydrationWarning
+                                        />
+                                        {/* Inner glow effect */}
+                                        <motion.circle
+                                            cx={String(spot.x)}
+                                            cy={String(spot.y)}
+                                            r={String(spot.innerRadius)}
+                                            fill={spot.color}
+                                            opacity="0.4"
+                                            initial={{ scale: 0, opacity: 0 }}
+                                            animate={isInView ? {
+                                                scale: [0, 1.5, 1],
+                                                opacity: [0, 0.6, 0.4]
+                                            } : {}}
+                                            transition={{
+                                                duration: 1,
+                                                delay: spot.delay + 0.1,
+                                                repeat: Infinity,
+                                                repeatDelay: 1.5
+                                            }}
+                                            suppressHydrationWarning
+                                        />
+                                        {/* Main dot */}
+                                        <motion.circle
+                                            cx={String(spot.x)}
+                                            cy={String(spot.y)}
+                                            r={String(spot.mainRadius)}
+                                            fill={spot.color}
+                                            className="cursor-pointer"
+                                            style={{
+                                                filter: 'drop-shadow(0 0 3px rgba(0, 212, 255, 0.8))'
+                                            }}
+                                            initial={{ scale: 0, opacity: 0 }}
+                                            animate={isInView ? {
+                                                scale: 1,
+                                                opacity: 1
+                                            } : {}}
+                                            transition={{
+                                                duration: 0.5,
+                                                delay: spot.delay + 0.2,
+                                                type: "spring",
+                                                stiffness: 200
+                                            }}
+                                            whileHover={{
+                                                scale: 1.5,
+                                                opacity: 1,
+                                                transition: { duration: 0.2 }
+                                            }}
+                                            suppressHydrationWarning
+                                        />
+                                    </motion.g>
+                                ))}
+                            </svg>
 
-                                {/* Community Spots Overlay */}
-                                <svg
-                                    className="absolute inset-0 w-full h-full"
-                                    viewBox="0 0 100 100"
-                                    preserveAspectRatio="none"
-                                >
-                                    {spots.map((spot) => (
-                                        <motion.g key={spot.id}>
-                                            {/* Outer glow ring */}
-                                            <motion.circle
-                                                cx={spot.x}
-                                                cy={spot.y}
-                                                r={spot.outerRadius}
-                                                fill={spot.color}
-                                                opacity="0.2"
-                                                initial={{ scale: 0, opacity: 0 }}
-                                                animate={isInView ? {
-                                                    scale: [0, 2, 1.5],
-                                                    opacity: [0, 0.4, 0.2]
-                                                } : {}}
-                                                transition={{
-                                                    duration: 1.2,
-                                                    delay: spot.delay,
-                                                    repeat: Infinity,
-                                                    repeatDelay: 1.5
-                                                }}
-                                            />
-                                            {/* Inner glow effect */}
-                                            <motion.circle
-                                                cx={spot.x}
-                                                cy={spot.y}
-                                                r={spot.innerRadius}
-                                                fill={spot.color}
-                                                opacity="0.5"
-                                                initial={{ scale: 0, opacity: 0 }}
-                                                animate={isInView ? {
-                                                    scale: [0, 1.5, 1],
-                                                    opacity: [0, 0.7, 0.5]
-                                                } : {}}
-                                                transition={{
-                                                    duration: 1,
-                                                    delay: spot.delay,
-                                                    repeat: Infinity,
-                                                    repeatDelay: 2
-                                                }}
-                                            />
-                                            {/* Main dot with shimmer */}
-                                            <motion.circle
-                                                cx={spot.x}
-                                                cy={spot.y}
-                                                r={spot.mainRadius}
-                                                fill={spot.color}
-                                                initial={{ scale: 0, opacity: 0 }}
-                                                animate={isInView ? {
-                                                    scale: [0, 1.2, 1],
-                                                    opacity: [0, 1, 0.95]
-                                                } : {}}
-                                                transition={{
-                                                    duration: 0.6,
-                                                    delay: spot.delay
-                                                }}
-                                                whileHover={{
-                                                    scale: 2,
-                                                    opacity: 1,
-                                                    transition: { duration: 0.2 }
-                                                }}
-                                                className="cursor-pointer"
-                                                style={{
-                                                    filter: 'drop-shadow(0 0 3px rgba(255, 255, 255, 0.8))'
-                                                }}
-                                            />
-                                        </motion.g>
-                                    ))}
-                                </svg>
-                            </div>
+                            {/* Border Glow */}
+                            <div className="absolute inset-0 rounded-3xl border border-[var(--color-primary)]/20" />
                         </div>
                     </motion.div>
 
                     {/* Stats Panel */}
                     <motion.div
-                        initial={{ x: 50, opacity: 0 }}
+                        initial={{ x: 30, opacity: 0 }}
                         animate={isInView ? { x: 0, opacity: 1 } : {}}
                         transition={{ duration: 0.8, delay: 0.4 }}
                         className="lg:col-span-2 space-y-6"
                     >
-                        {/* Member Count */}
-                        <div className="bg-slate-900/50 backdrop-blur-xl rounded-2xl border border-white/10 p-8 text-center">
+                        {/* Member Count Card */}
+                        <div className="bg-[var(--glass-bg)] backdrop-blur-xl rounded-2xl border border-[var(--glass-border)] p-8 relative overflow-hidden group">
+                            {/* Scan Line Effect */}
                             <motion.div
-                                className="text-6xl lg:text-7xl font-bold bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 bg-clip-text text-transparent font-serif"
-                            >
-                                {count}+
-                            </motion.div>
-                            <p className="text-[var(--color-text-secondary)] mt-3 text-lg">
-                                Active Members
-                            </p>
+                                className="absolute inset-0 bg-gradient-to-b from-transparent via-[var(--color-primary)]/10 to-transparent opacity-0 group-hover:opacity-100"
+                                animate={{ y: ['-100%', '200%'] }}
+                                transition={{ duration: 2, repeat: Infinity, repeatDelay: 1 }}
+                            />
+
+                            <div className="relative">
+                                <div className="text-6xl font-bold text-[var(--color-primary)] mb-2" style={{ letterSpacing: '-0.02em' }}>
+                                    {count}+
+                                </div>
+                                <div className="text-xl text-[var(--color-text-primary)] font-semibold mb-2">
+                                    Active Members
+                                </div>
+                                <div className="text-sm text-[var(--color-text-secondary)]">
+                                    Growing community across Delhi University
+                                </div>
+                            </div>
+
+                            {/* Corner Accent */}
+                            <div className="absolute top-0 right-0 w-20 h-20 bg-[var(--color-primary)]/10 rounded-bl-full" />
                         </div>
 
-                        {/* Quick Stats */}
+                        {/* Additional Stats */}
                         <div className="grid grid-cols-2 gap-4">
                             {[
-                                { label: 'Colleges', value: '15+' },
-                                { label: 'Events', value: '50+' },
-                                { label: 'Projects', value: '30+' },
-                                { label: 'Workshops', value: '25+' }
+                                { value: '10+', label: 'Colleges' },
+                                { value: '50+', label: 'Events' }
                             ].map((stat, index) => (
                                 <motion.div
-                                    key={stat.label}
+                                    key={index}
                                     initial={{ y: 20, opacity: 0 }}
                                     animate={isInView ? { y: 0, opacity: 1 } : {}}
-                                    transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
-                                    className="bg-slate-900/30 backdrop-blur-xl rounded-xl border border-white/5 p-4 text-center"
+                                    transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
+                                    className="bg-[var(--glass-bg)] backdrop-blur-xl rounded-xl border border-[var(--glass-border)] p-6 hover:border-[var(--color-primary)]/30 transition-all group"
                                 >
-                                    <div className="text-2xl font-bold text-[var(--color-primary)] font-serif">
+                                    <div className="text-3xl font-bold text-[var(--color-primary)] mb-1" style={{ letterSpacing: '-0.02em' }}>
                                         {stat.value}
                                     </div>
-                                    <p className="text-sm text-[var(--color-text-secondary)] mt-1">
+                                    <div className="text-sm text-[var(--color-text-secondary)]">
                                         {stat.label}
-                                    </p>
+                                    </div>
+                                    {/* Corner Accent */}
+                                    <div className="absolute top-0 right-0 w-2 h-2 bg-[var(--color-primary)] opacity-0 group-hover:opacity-100 transition-opacity" />
                                 </motion.div>
                             ))}
                         </div>
 
                         {/* CTA */}
-                        <motion.a
-                            href="/Join"
+                        <motion.div
                             initial={{ y: 20, opacity: 0 }}
                             animate={isInView ? { y: 0, opacity: 1 } : {}}
-                            transition={{ duration: 0.5, delay: 1 }}
-                            whileHover={{ scale: 1.05, y: -2 }}
-                            className="block w-full px-6 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl text-center shadow-lg hover:shadow-xl transition-all duration-300"
+                            transition={{ duration: 0.6, delay: 0.8 }}
                         >
-                            Join Our Community
-                        </motion.a>
+                            <a
+                                href="/Join"
+                                className="block w-full bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-dark)] text-white text-center py-4 rounded-xl font-semibold hover:shadow-lg hover:shadow-[var(--color-primary)]/30 transition-all relative overflow-hidden group"
+                            >
+                                {/* Scan Line Effect */}
+                                <motion.div
+                                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                                    animate={{ x: ['-200%', '200%'] }}
+                                    transition={{ duration: 2, repeat: Infinity, repeatDelay: 1 }}
+                                />
+                                <span className="relative z-10">Join Our Community</span>
+                            </a>
+                        </motion.div>
                     </motion.div>
                 </div>
             </div>

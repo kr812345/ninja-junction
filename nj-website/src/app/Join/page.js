@@ -1,246 +1,154 @@
 'use client'
 
-import React, { useState } from 'react'
+import React from 'react'
 import { motion } from 'motion/react'
-import { submitApplication } from '../../Services/Join'
-import toast, { Toaster } from 'react-hot-toast'
+import Link from 'next/link'
 
 export default function Join() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    university: '',
-    program: '',
-    year: '',
-    skills: '',
-    interests: '',
-    github: '',
-    linkedin: '',
-    reason: ''
-  })
-
-  const [submitting, setSubmitting] = useState(false)
-
-  const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-  }
-
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    setSubmitting(true)
-    try {
-      const res = await submitApplication(formData)
-
-      if (res.success === false) {
-        // Handle validation errors from the backend
-        const errorMessage = res.errors ? res.errors.join(', ') : res.message
-        throw new Error(errorMessage)
-      }
-
-      toast.success(res?.message || 'Application submitted! We will get back to you soon.')
-      setFormData({
-        name: '',
-        email: '',
-        university: '',
-        program: '',
-        year: '',
-        skills: '',
-        interests: '',
-        github: '',
-        linkedin: '',
-        reason: ''
-      })
-    } catch (err) {
-      toast.error(err?.message || 'Failed to submit. Please try again later.')
-    } finally {
-      setSubmitting(false)
-    }
-  }
-
   return (
-    <div className="min-h-screen bg-[var(--color-background)] relative overflow-hidden">
+    <div className="min-h-screen bg-[var(--color-background)] relative overflow-hidden flex items-center justify-center">
+      {/* Background Effects */}
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1, delay: 0.2 }}
-        className="absolute top-20 right-20 w-[300px] h-[300px] bg-primary/20 rounded-full -z-10 blur-2xl sm:w-[200px] sm:h-[200px] sm:top-10 sm:right-10"
+        className="absolute top-20 right-20 w-[400px] h-[400px] bg-primary/20 rounded-full -z-10 blur-3xl"
       />
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1, delay: 0.4 }}
-        className="absolute bottom-20 left-10 w-[200px] h-[200px] bg-blue-300/30 rounded-full -z-10 blur-xl sm:w-[150px] sm:h-[150px] sm:bottom-10 sm:left-5"
+        className="absolute bottom-20 left-10 w-[300px] h-[300px] bg-blue-300/30 rounded-full -z-10 blur-2xl"
       />
 
-      <div className="container mx-auto py-16 px-4 relative pt-24 lg:pt-32 xl:pt-40 sm:pt-20 sm:px-6">
+      <div className="container mx-auto px-4 py-16 relative">
         <motion.div
-          initial={{ opacity: 0, y: -30 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12 lg:mb-16"
+          className="max-w-3xl mx-auto text-center"
         >
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 gradient-text">
-            Join Ninja Junction
-          </h1>
-          <div className="w-16 sm:w-20 lg:w-24 h-1 bg-primary mx-auto mb-4 lg:mb-6"></div>
-          <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto px-4">
-            Become a member to collaborate, contribute, and innovate together.
-          </p>
-        </motion.div>
+          {/* Icon */}
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.2, type: "spring", stiffness: 200 }}
+            className="mb-8 inline-block"
+          >
+            <div className="w-32 h-32 mx-auto bg-gradient-to-br from-primary/20 to-blue-500/20 rounded-full flex items-center justify-center border-4 border-primary/30 backdrop-blur-md">
+              <svg className="w-16 h-16 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+            </div>
+          </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="max-w-4xl mx-auto"
-        >
-          <div className="bg-white/80 backdrop-blur-sm p-6 lg:p-8 rounded-2xl shadow-xl border border-primary/10">
-            <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
-              <div className="col-span-1">
-                <label className="block text-sm font-semibold text-gray-700 mb-2">Full Name</label>
-                <input
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  className="w-full p-3 lg:p-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 hover:border-primary/50 text-sm lg:text-base focus:outline-none"
-                  placeholder="Enter your full name"
-                />
+          {/* Heading */}
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="text-4xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-slate-100 via-slate-200 to-slate-300 bg-clip-text text-transparent"
+          >
+            Team Currently Full
+          </motion.h1>
+
+          {/* Description */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="mb-8 space-y-4"
+          >
+            <p className="text-xl text-slate-300 leading-relaxed">
+              Thank you for your interest in joining Ninja Junction!
+            </p>
+            <p className="text-lg text-slate-400 leading-relaxed max-w-2xl mx-auto">
+              We're currently at full capacity and focusing on strengthening our existing community.
+              We appreciate your enthusiasm and encourage you to stay connected with us through our events and activities.
+            </p>
+          </motion.div>
+
+          {/* CTA Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-12"
+          >
+            <Link href="/Events">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-8 py-4 bg-gradient-to-r from-primary to-blue-600 text-white rounded-xl font-semibold text-lg shadow-lg shadow-primary/30 hover:shadow-primary/50 transition-all duration-300"
+              >
+                Explore Events
+              </motion.button>
+            </Link>
+
+            <Link href="/Contact">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-8 py-4 bg-slate-800/50 backdrop-blur-md border border-slate-700/50 text-slate-200 rounded-xl font-semibold text-lg hover:border-primary/50 hover:bg-slate-800/70 transition-all duration-300"
+              >
+                Contact Us
+              </motion.button>
+            </Link>
+          </motion.div>
+
+          {/* Info Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="mt-16 p-8 bg-slate-800/30 backdrop-blur-md rounded-2xl border border-slate-700/50"
+          >
+            <h3 className="text-2xl font-bold text-slate-100 mb-4">
+              Stay Connected
+            </h3>
+            <p className="text-slate-300 mb-6">
+              While we're not accepting new members right now, you can still participate in our events, workshops, and hackathons!
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
+              <div className="flex items-start space-x-3">
+                <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-slate-200 mb-1">Attend Events</h4>
+                  <p className="text-sm text-slate-400">Join our workshops and meetups</p>
+                </div>
               </div>
 
-              <div className="col-span-1">
-                <label className="block text-sm font-semibold text-gray-700 mb-2">Email</label>
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="w-full p-3 lg:p-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 hover:border-primary/50 text-sm lg:text-base focus:outline-none"
-                  placeholder="your.email@example.com"
-                />
+              <div className="flex items-start space-x-3">
+                <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                  </svg>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-slate-200 mb-1">Network</h4>
+                  <p className="text-sm text-slate-400">Connect with our community</p>
+                </div>
               </div>
 
-              <div className="col-span-1">
-                <label className="block text-sm font-semibold text-gray-700 mb-2">University / College</label>
-                <input
-                  type="text"
-                  name="university"
-                  value={formData.university}
-                  onChange={handleChange}
-                  required
-                  className="w-full p-3 lg:p-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 hover:border-primary/50 text-sm lg:text-base focus:outline-none"
-                  placeholder="e.g. VIT, BITS, IIT ..."
-                />
+              <div className="flex items-start space-x-3">
+                <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-amber-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-slate-200 mb-1">Collaborate</h4>
+                  <p className="text-sm text-slate-400">Work on exciting projects</p>
+                </div>
               </div>
-
-              <div className="col-span-1">
-                <label className="block text-sm font-semibold text-gray-700 mb-2">Program</label>
-                <input
-                  type="text"
-                  name="program"
-                  value={formData.program}
-                  onChange={handleChange}
-                  required
-                  className="w-full p-3 lg:p-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 hover:border-primary/50 text-sm lg:text-base focus:outline-none"
-                  placeholder="e.g. B.Tech CSE"
-                />
-              </div>
-
-              <div className="col-span-1">
-                <label className="block text-sm font-semibold text-gray-700 mb-2">Year</label>
-                <input
-                  type="text"
-                  name="year"
-                  value={formData.year}
-                  onChange={handleChange}
-                  required
-                  className="w-full p-3 lg:p-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 hover:border-primary/50 text-sm lg:text-base focus:outline-none"
-                  placeholder="e.g. 2nd year"
-                />
-              </div>
-
-              <div className="col-span-1">
-                <label className="block text-sm font-semibold text-gray-700 mb-2">Skills</label>
-                <input
-                  type="text"
-                  name="skills"
-                  value={formData.skills}
-                  onChange={handleChange}
-                  className="w-full p-3 lg:p-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 hover:border-primary/50 text-sm lg:text-base focus:outline-none"
-                  placeholder="e.g. React, Node.js, UI/UX, ML"
-                />
-              </div>
-
-              <div className="md:col-span-2">
-                <label className="block text-sm font-semibold text-gray-700 mb-2">Interests</label>
-                <input
-                  type="text"
-                  name="interests"
-                  value={formData.interests}
-                  onChange={handleChange}
-                  className="w-full p-3 lg:p-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 hover:border-primary/50 text-sm lg:text-base focus:outline-none"
-                  placeholder="Hackathons, Open Source, Startups, AI, etc."
-                />
-              </div>
-
-              <div className="col-span-1">
-                <label className="block text-sm font-semibold text-gray-700 mb-2">GitHub</label>
-                <input
-                  type="url"
-                  name="github"
-                  value={formData.github}
-                  onChange={handleChange}
-                  className="w-full p-3 lg:p-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 hover:border-primary/50 text-sm lg:text-base focus:outline-none"
-                  placeholder="https://github.com/yourid"
-                />
-              </div>
-
-              <div className="col-span-1">
-                <label className="block text-sm font-semibold text-gray-700 mb-2">LinkedIn</label>
-                <input
-                  type="url"
-                  name="linkedin"
-                  value={formData.linkedin}
-                  onChange={handleChange}
-                  className="w-full p-3 lg:p-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 hover:border-primary/50 text-sm lg:text-base focus:outline-none"
-                  placeholder="https://linkedin.com/in/yourid"
-                />
-              </div>
-
-              <div className="md:col-span-2">
-                <label className="block text-sm font-semibold text-gray-700 mb-2">Why do you want to join?</label>
-                <textarea
-                  name="reason"
-                  value={formData.reason}
-                  onChange={handleChange}
-                  rows={5}
-                  required
-                  className="w-full p-3 lg:p-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 hover:border-primary/50 resize-none text-sm lg:text-base focus:outline-none"
-                  placeholder="Tell us about yourself and what you’d like to do at Ninja Junction"
-                />
-              </div>
-
-              <div className="md:col-span-2">
-                <motion.button
-                  type="submit"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  disabled={submitting}
-                  className="w-full bg-primary text-white py-3 lg:py-4 px-6 lg:px-8 rounded-xl font-semibold hover:bg-primary/90 transition-all duration-200 shadow-lg hover:shadow-xl text-sm lg:text-base disabled:opacity-60 disabled:cursor-not-allowed"
-                >
-                  {submitting ? 'Submitting…' : 'Apply for Membership'}
-                </motion.button>
-              </div>
-            </form>
-          </div>
+            </div>
+          </motion.div>
         </motion.div>
       </div>
-
-      {/* <Toaster position="top-center" reverseOrder={false} /> */}
     </div>
   )
 }
-

@@ -3,6 +3,8 @@ import "./globals.css";
 import Navbar from "@/Components/Navbar";
 import ScrollNavigator from "@/Components/ScrollNavigator";
 import LoadingScreen from "@/Components/LoadingScreen";
+import MatrixRain from "@/Components/MatrixRain";
+import CustomCursor from "@/Components/CustomCursor";
 import { Toaster } from "react-hot-toast";
 
 const inter = Inter({
@@ -29,7 +31,10 @@ export default function RootLayout({ children }) {
       <body
         suppressHydrationWarning
         className={`${inter.variable} ${merriweather.variable} antialiased font-sans`}
+        style={{ cursor: 'none' }}
       >
+        <MatrixRain />
+        <CustomCursor />
         <LoadingScreen>
           <Navbar />
           <ScrollNavigator>
