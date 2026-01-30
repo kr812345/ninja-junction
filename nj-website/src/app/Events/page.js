@@ -14,10 +14,10 @@ export default function Events() {
     }
 
     return (
-        <main className="font-sans min-h-screen">
+        <main className="font-sans min-h-screen bg-[var(--color-background)]">
             <section className="pt-40 pb-16 px-44 not-sm:px-4 not-sm:pt-32 space-y-16">
                 <div className="">
-                    <motion.h2 
+                    <motion.h2
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5 }}
@@ -48,11 +48,11 @@ export default function Events() {
                                 <div className="p-6 relative">
                                     <h3 className="text-2xl font-semibold mb-2 line-clamp-1">{event.title}</h3>
                                     <p className='line-clamp-4'>{event.description}</p>
-                                    <motion.button 
+                                    <motion.button
                                         whileHover={{ scale: 1.05 }}
                                         whileTap={{ scale: 0.95 }}
                                         className="mt-4 mb-0 inline-block bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition"
-                                        onClick={(e)=>handleRedirect(e, event.link)}
+                                        onClick={(e) => handleRedirect(e, event.link)}
                                         disabled={event.status === 'Unavailable'}
                                     >
                                         {event.status}
@@ -61,10 +61,10 @@ export default function Events() {
                             </motion.div>
                         ))}
                     </div>
-                    </div>
+                </div>
 
-                    <div className="">
-                    <motion.h2 
+                <div className="">
+                    <motion.h2
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5 }}
@@ -95,7 +95,7 @@ export default function Events() {
                                 <div className="p-6">
                                     <h3 className="text-2xl font-semibold mb-2">{event.title}</h3>
                                     <p className='line-clamp-4'>{event.description}</p>
-                                    <motion.button 
+                                    <motion.button
                                         className="mt-4 inline-block bg-primary/70 text-white px-4 py-2 rounded-lg "
                                         disabled={event.status === 'Unavailable'}
                                     >
