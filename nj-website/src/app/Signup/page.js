@@ -19,7 +19,7 @@ export default function Signup() {
         e.preventDefault();
         const { username, email, password, confirmPassword } = formData;
         const validation = validateSignupForm(username, email, password, confirmPassword);
-        
+
         if (!validation.isValid) {
             setError(validation.message);
             return;
@@ -40,7 +40,7 @@ export default function Signup() {
     };
 
     return (
-        <main className="bg text-[var(--light)]">
+        <main className="bg-[var(--color-background)] text-[var(--light)]">
             <Navbar />
             <section className="flex items-center justify-center min-h-[100vh] px-4">
                 <div className="bg-primary/10 border border-primary backdrop-blur-md p-8 rounded-2xl shadow-lg w-full max-w-md">
@@ -117,7 +117,7 @@ export default function Signup() {
                     </form>
                 </div>
             </section>
-                <Toaster position='top-center' reverseOrder={false}/>
+            <Toaster position='top-center' reverseOrder={false} />
         </main>
     );
 }

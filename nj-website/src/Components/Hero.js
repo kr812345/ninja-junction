@@ -1,119 +1,98 @@
 'use client';
 import Link from 'next/link';
-import Image from 'next/image';
 import { motion } from 'framer-motion';
+import ParticleNetwork from './ParticleNetwork';
+import GlitchText from './GlitchText';
+import MagneticButton from './MagneticButton';
 
 export default function Hero() {
     return (
-        <motion.section 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
-            id="home" 
-            className="h-screen bg-white flex items-center pb-12 not-md:pt-40 md:pb-20 "
+        <section
+            id="home"
+            className="relative min-h-screen flex items-center justify-center pt-20 pb-20 overflow-hidden bg-[var(--color-background)]"
         >
-            <div className="max-w-[85%] mx-auto sm:px-6 lg:px-8 lg:h-screen">
-                <div className="lg:grid lg:grid-cols-12 lg:gap-8 h-full w-fit text-nowrap">
-                    <motion.div 
-                        initial={{ x: -50, opacity: 0 }}
-                        animate={{ x: 0, opacity: 1 }}
-                        transition={{ duration: 0.6, delay: 0.2 }}
-                        className="h-full my-auto flex flex-col justify-center space-y-1 sm:text-center md:max-w-2xl lg:col-span-6 lg:text-left"
-                    >
-                        <h1 className="text-6xl tracking-tight font-extrabold text-gray-900 md:text-6xl">
-                            <motion.span 
-                                initial={{ y: 20, opacity: 0 }}
-                                animate={{ y: 0, opacity: 1 }}
-                                transition={{ duration: 0.6, delay: 0.3 }}
-                                className="block text-7xl not-sm:text-4xl "
-                            >
-                                Collaborate.
-                            </motion.span>
-                            <motion.span 
-                                initial={{ y: 20, opacity: 0 }}
-                                animate={{ y: 0, opacity: 1 }}
-                                transition={{ duration: 0.6, delay: 0.5 }}
-                                className="block text-7xl not-sm:text-4xl "
-                            >
-                                Contribute. Create.
-                            </motion.span>
-                            <motion.span 
-                                initial={{ y: 20, opacity: 0 }}
-                                animate={{ y: 0, opacity: 1 }}
-                                transition={{ duration: 0.6, delay: 0.7 }}
-                                className="block gradient-text text-7xl not-sm:text-4xl "
-                            >
-                                Innovate Together.
-                            </motion.span>
+            {/* Particle Network Background */}
+            <ParticleNetwork />
+
+            {/* Animated Gradient Mesh - Dribbble Style */}
+            <motion.div
+                className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full blur-[150px] -z-10"
+                style={{
+                    background: 'radial-gradient(circle, rgba(0,229,255,0.3) 0%, rgba(99,102,241,0.2) 50%, transparent 100%)'
+                }}
+                animate={{
+                    x: [0, 100, 0],
+                    y: [0, -50, 0],
+                    scale: [1, 1.2, 1]
+                }}
+                transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+            />
+            <motion.div
+                className="absolute bottom-0 left-0 w-[700px] h-[700px] rounded-full blur-[150px] -z-10"
+                style={{
+                    background: 'radial-gradient(circle, rgba(168,85,247,0.25) 0%, rgba(59,130,246,0.15) 50%, transparent 100%)'
+                }}
+                animate={{
+                    x: [0, -80, 0],
+                    y: [0, 60, 0],
+                    scale: [1, 1.15, 1]
+                }}
+                transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+            />
+
+            {/* Animated Scan Lines - MORE VISIBLE */}
+            <motion.div
+                className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-400/15 to-transparent pointer-events-none z-10"
+                animate={{ y: ['-100%', '100%'] }}
+                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+            />
+
+            {/* Tech Grid Pattern - More Visible */}
+            <div className="absolute inset-0 opacity-30 pointer-events-none" style={{
+                backgroundImage: `
+                    linear-gradient(rgba(0, 229, 255, 0.05) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(0, 229, 255, 0.05) 1px, transparent 1px)
+                `,
+                backgroundSize: '50px 50px'
+            }} />
+
+            <div className="max-w-5xl mx-auto px-6 lg:px-8 w-full relative z-20">
+                {/* Centered Content */}
+                <motion.div
+                    initial={{ y: 30, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.8 }}
+                    className="flex flex-col items-center text-center space-y-8"
+                >
+                    {/* Holographic Glow Around Heading */}
+                    <div className="relative">
+                        <motion.div
+                            className="absolute -inset-4 bg-gradient-to-r from-cyan-400/20 via-blue-500/20 to-purple-500/20 rounded-3xl blur-2xl"
+                            animate={{ opacity: [0.3, 0.6, 0.3] }}
+                            transition={{ duration: 3, repeat: Infinity }}
+                        />
+                        <h1 className="relative text-5xl lg:text-7xl font-bold tracking-tight text-[var(--color-text-primary)] font-serif leading-tight">
+                            <GlitchText>One Platform for</GlitchText> <span className="text-[var(--color-primary)]"><GlitchText>Students, Events & Hackathons</GlitchText></span>
                         </h1>
-                        <motion.p 
-                            initial={{ y: 20, opacity: 0 }}
-                            animate={{ y: 0, opacity: 1 }}
-                            transition={{ duration: 0.6, delay: 0.9 }}
-                            className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg not-sm:tracking-tight sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0 text-wrap"
-                        >
-                            The ultimate platform for students to find collaborators, share ideas, and work on projects
-                            together. Connect with like-minded peers across disciplines.
-                        </motion.p>
-                        <motion.div 
-                            initial={{ y: 20, opacity: 0 }}
-                            animate={{ y: 0, opacity: 1 }}
-                            transition={{ duration: 0.6, delay: 1.1 }}
-                            className="mt-8 sm:max-w-lg sm:mx-auto sm:text-center lg:text-left lg:mx-0"
-                        >
-                            <div className="flex flex-col space-y-3 sm:flex-row sm:space-y-0 sm:space-x-3">
-                                <Link href="/Join"
-                                    className="gradient-bg font-semibold text-white bg-primary px-9 py-3 rounded-md text-base hover:bg-opacity-90 transition w-full sm:w-auto text-center">
-                                    Join Us
-                                </Link>
-                                {/* <Link href="/Projects"
-                                    className="text-primary px-6 py-3 rounded-md text-base font-medium border border-primary hover:bg-gray-50 transition sm:w-auto text-center">
-                                    Explore Projects
-                                </Link> */}
-                            </div>
-                        </motion.div>
-                    </motion.div>
-                    <motion.div 
-                        initial={{ x: 50, opacity: 0 }}
-                        animate={{ x: 0, opacity: 1 }}
-                        transition={{ duration: 0.6, delay: 0.4 }}
-                        className="mt-12 relative lg:col-span-6 flex justify-center not-sm:mt-8"
-                    >
-                        <div className="relative mx-auto my-auto bg-primary w-[80%] h-fit rounded-lg shadow-lg overflow-hidden not-sm:w-[100%] not-sm:h-[200px]">
-                            <div className="gradient-bg h-full w-full p-2 not-sm:p-1">
-                                <div className="bg-white rounded-t-lg p-4">
-                                    <div className="flex space-x-2">
-                                        <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                                        <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                                        <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                                    </div>
-                                </div>
-                                <Image
-                                    src="./hero.svg"
-                                    alt="Diverse group of students collaborating on a project in a modern university workspace"
-                                    width={600}
-                                    height={400}
-                                    className="w-full h-auto rounded-b-lg"
-                                />
-                            </div>
-                            <motion.div 
-                                animate={{ 
-                                    rotate: [0, 5, -5, 0],
-                                    transition: { duration: 5, repeat: Infinity }
-                                }}
-                                className="absolute -bottom-8 -left-8 bg-blue-100 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-20 rounded- w-32 h-32 z-0 not-sm:w-22 not-sm:h-22"
-                            />
-                            <motion.div 
-                                animate={{ 
-                                    rotate: [0, -5, 5, 0],
-                                    transition: { duration: 5, repeat: Infinity }
-                                }}
-                                className="absolute -top-8 -right-8 bg-gray-200 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-20 rounded- w-32 h-32 z-0 not-sm:w-22 not-sm:h-22"
-                            />
+                    </div>
+
+                    <p className="text-lg lg:text-xl text-[var(--color-text-secondary)] font-sans max-w-2xl leading-relaxed">
+                        Connecting students across Delhi colleges through tech, creativity, and collaboration
+                    </p>
+
+                    <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                        <div className="relative px-8 py-4 bg-gray-600 text-white font-semibold rounded-xl text-center cursor-not-allowed opacity-60">
+                            <span className="relative z-10">Join Community (Coming Soon)</span>
                         </div>
-                    </motion.div>
-                </div>
+                        <MagneticButton
+                            href="/Events"
+                            className="px-8 py-4 bg-white/5 text-white border border-white/10 font-semibold rounded-xl hover:bg-white/10 hover:border-cyan-400/50 transition-all text-center backdrop-blur-sm animate-glow"
+                        >
+                            Explore Events
+                        </MagneticButton>
+                    </div>
+                </motion.div>
             </div>
-        </motion.section>
+        </section>
     );
 }
