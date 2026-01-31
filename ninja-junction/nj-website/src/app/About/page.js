@@ -13,15 +13,9 @@ export default function About() {
     const galleryImages = [
         'WhatsApp Image 2026-01-30 at 8.57.43 AM.jpeg',
         'WhatsApp Image 2026-01-30 at 8.57.44 AM.jpeg',
-        'WhatsApp Image 2026-01-30 at 8.57.45 AM.jpeg',
-        'WhatsApp Image 2026-01-30 at 8.58.21 AM.jpeg',
-        'WhatsApp Image 2026-01-30 at 8.58.22 AM.jpeg',
-        'WhatsApp Image 2026-01-30 at 8.58.29 AM.jpeg',
-        'WhatsApp Image 2026-01-30 at 8.58.30 AM.jpeg',
         'WhatsApp Image 2026-01-30 at 8.58.31 AM.jpeg',
         'WhatsApp Image 2026-01-30 at 8.58.32 AM.jpeg',
         'WhatsApp Image 2026-01-30 at 8.58.33 AM.jpeg',
-        'WhatsApp Image 2026-01-30 at 8.58.34 AM.jpeg',
         'WhatsApp Image 2026-01-30 at 8.58.35 AM.jpeg',
         'WhatsApp Image 2026-01-30 at 8.58.36 AM.jpeg',
         'WhatsApp Image 2026-01-30 at 9.12.16 AM.jpeg',
@@ -138,32 +132,62 @@ export default function About() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.5 }}
-                        whileHover={{ y: -5 }}
-                        className="group bg-white/90 backdrop-blur-sm p-6 lg:p-8 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300"
+                        whileHover={{ y: -10 }}
+                        className="group relative bg-slate-900/60 backdrop-blur-xl p-6 lg:p-8 rounded-2xl border border-white/10 hover:border-cyan-500/50 transition-all duration-300 overflow-hidden hover:shadow-2xl hover:shadow-cyan-500/20"
                     >
-                        <div className="w-12 h-12 lg:w-16 lg:h-16 border-2 border-cyan-400/30 rounded-xl mb-4 lg:mb-6 flex items-center justify-center group-hover:border-cyan-400 transition-all">
-                            <svg className="w-6 h-6 lg:w-8 lg:h-8 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                            </svg>
+                        {/* Holographic Border Gradient */}
+                        <div className="absolute inset-0 p-[1px] rounded-2xl bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+                        {/* Scanline Effect */}
+                        <motion.div
+                            className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-400/10 to-transparent pointer-events-none"
+                            initial={{ y: '-100%' }}
+                            whileHover={{ y: '200%' }}
+                            transition={{ duration: 1.5, repeat: Infinity }}
+                        />
+
+                        <div className="relative z-10">
+                            <div className="w-12 h-12 lg:w-16 lg:h-16 bg-gradient-to-br from-cyan-500 to-blue-500 p-[2px] rounded-xl mb-4 lg:mb-6 group-hover:scale-110 transition-transform">
+                                <div className="w-full h-full bg-slate-900/90 rounded-xl flex items-center justify-center">
+                                    <svg className="w-6 h-6 lg:w-8 lg:h-8 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <h3 className="text-xl lg:text-2xl font-bold mb-3 lg:mb-4 text-white group-hover:text-cyan-400 transition-colors">Connect</h3>
+                            <p className="text-slate-400 leading-relaxed group-hover:text-slate-300 transition-colors">Find and connect with like-minded students across different disciplines.</p>
                         </div>
-                        <h3 className="text-xl lg:text-2xl font-bold mb-3 lg:mb-4 text-primary">Connect</h3>
-                        <p className="text-gray-600 leading-relaxed">Find and connect with like-minded students across different disciplines.</p>
                     </motion.div>
 
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.6 }}
-                        whileHover={{ y: -5 }}
-                        className="group bg-white/90 backdrop-blur-sm p-6 lg:p-8 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300"
+                        whileHover={{ y: -10 }}
+                        className="group relative bg-slate-900/60 backdrop-blur-xl p-6 lg:p-8 rounded-2xl border border-white/10 hover:border-purple-500/50 transition-all duration-300 overflow-hidden hover:shadow-2xl hover:shadow-purple-500/20"
                     >
-                        <div className="w-12 h-12 lg:w-16 lg:h-16 border-2 border-cyan-400/30 rounded-xl mb-4 lg:mb-6 flex items-center justify-center group-hover:border-cyan-400 transition-all">
-                            <svg className="w-6 h-6 lg:w-8 lg:h-8 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                            </svg>
+                        {/* Holographic Border Gradient */}
+                        <div className="absolute inset-0 p-[1px] rounded-2xl bg-gradient-to-r from-transparent via-purple-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+                        {/* Scanline Effect */}
+                        <motion.div
+                            className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-400/10 to-transparent pointer-events-none"
+                            initial={{ y: '-100%' }}
+                            whileHover={{ y: '200%' }}
+                            transition={{ duration: 1.5, repeat: Infinity }}
+                        />
+
+                        <div className="relative z-10">
+                            <div className="w-12 h-12 lg:w-16 lg:h-16 bg-gradient-to-br from-purple-500 to-pink-500 p-[2px] rounded-xl mb-4 lg:mb-6 group-hover:scale-110 transition-transform">
+                                <div className="w-full h-full bg-slate-900/90 rounded-xl flex items-center justify-center">
+                                    <svg className="w-6 h-6 lg:w-8 lg:h-8 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <h3 className="text-xl lg:text-2xl font-bold mb-3 lg:mb-4 text-white group-hover:text-purple-400 transition-colors">Collaborate</h3>
+                            <p className="text-slate-400 leading-relaxed group-hover:text-slate-300 transition-colors">Work together on exciting projects and share innovative ideas.</p>
                         </div>
-                        <h3 className="text-xl lg:text-2xl font-bold mb-3 lg:mb-4 text-primary">Collaborate</h3>
-                        <p className="text-gray-600 leading-relaxed">Work together on exciting projects and share innovative ideas.</p>
                     </motion.div>
 
 
@@ -171,16 +195,31 @@ export default function About() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.7 }}
-                        whileHover={{ y: -5 }}
-                        className="group bg-white/90 backdrop-blur-sm p-6 lg:p-8 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 sm:col-span-2 lg:col-span-1"
+                        whileHover={{ y: -10 }}
+                        className="group relative bg-slate-900/60 backdrop-blur-xl p-6 lg:p-8 rounded-2xl border border-white/10 hover:border-emerald-500/50 transition-all duration-300 overflow-hidden hover:shadow-2xl hover:shadow-emerald-500/20 sm:col-span-2 lg:col-span-1"
                     >
-                        <div className="w-12 h-12 lg:w-16 lg:h-16 border-2 border-cyan-400/30 rounded-xl mb-4 lg:mb-6 flex items-center justify-center group-hover:border-cyan-400 transition-all">
-                            <svg className="w-6 h-6 lg:w-8 lg:h-8 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
-                            </svg>
+                        {/* Holographic Border Gradient */}
+                        <div className="absolute inset-0 p-[1px] rounded-2xl bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+                        {/* Scanline Effect */}
+                        <motion.div
+                            className="absolute inset-0 bg-gradient-to-b from-transparent via-emerald-400/10 to-transparent pointer-events-none"
+                            initial={{ y: '-100%' }}
+                            whileHover={{ y: '200%' }}
+                            transition={{ duration: 1.5, repeat: Infinity }}
+                        />
+
+                        <div className="relative z-10">
+                            <div className="w-12 h-12 lg:w-16 lg:h-16 bg-gradient-to-br from-emerald-500 to-green-500 p-[2px] rounded-xl mb-4 lg:mb-6 group-hover:scale-110 transition-transform">
+                                <div className="w-full h-full bg-slate-900/90 rounded-xl flex items-center justify-center">
+                                    <svg className="w-6 h-6 lg:w-8 lg:h-8 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <h3 className="text-xl lg:text-2xl font-bold mb-3 lg:mb-4 text-white group-hover:text-emerald-400 transition-colors">Create</h3>
+                            <p className="text-slate-400 leading-relaxed group-hover:text-slate-300 transition-colors">Turn your ideas into reality with the perfect team!</p>
                         </div>
-                        <h3 className="text-xl lg:text-2xl font-bold mb-3 lg:mb-4 text-primary">Create</h3>
-                        <p className="text-gray-600 leading-relaxed">Turn your ideas into reality with the perfect team!</p>
                     </motion.div>
                 </motion.div>
 
