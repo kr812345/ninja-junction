@@ -70,7 +70,7 @@ export default function HolographicEventCard({ event, onClick, isPast = false })
                 ) : (
                     <MagneticButton
                         className={`
-                            w-full py-2.5 rounded-lg text-sm font-bold tracking-wide transition-all border
+                            w-full py-2.5 rounded-lg text-sm font-bold tracking-wide transition-all border flex items-center justify-center
                             ${event.status === 'Unavailable'
                                 ? 'bg-slate-800 text-slate-500 border-slate-700 cursor-not-allowed'
                                 : 'bg-cyan-500/20 text-cyan-300 border-cyan-500/50 hover:bg-cyan-500/30 hover:shadow-[0_0_15px_rgba(6,182,212,0.3)]'}
