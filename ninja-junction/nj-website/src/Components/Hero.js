@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import ParticleNetwork from './ParticleNetwork';
 import GlitchText from './GlitchText';
 import MagneticButton from './MagneticButton';
+import FastTypewriter from './FastTypewriter';
 
 export default function Hero() {
     return (
@@ -77,13 +78,16 @@ export default function Hero() {
                     </div>
 
                     <p className="text-lg lg:text-xl text-[var(--color-text-secondary)] font-sans max-w-2xl leading-relaxed">
-                        Connecting students across Delhi colleges through tech, creativity, and collaboration
+                        <FastTypewriter text="Connecting students across Delhi colleges through tech, creativity, and collaboration" />
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                        <div className="relative px-8 py-4 bg-gray-600 text-white font-semibold rounded-xl text-center cursor-not-allowed opacity-60">
-                            <span className="relative z-10">Join Community (Coming Soon)</span>
-                        </div>
+                        <MagneticButton
+                            href="https://chat.whatsapp.com/KCMrNnAQgBNBZaZ3WxorTm"
+                            className="px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-500 text-white font-semibold rounded-xl hover:from-green-600 hover:to-emerald-600 transition-all text-center shadow-lg hover:shadow-green-500/50"
+                        >
+                            Join our WhatsApp Community
+                        </MagneticButton>
                         <MagneticButton
                             href="/Events"
                             className="px-8 py-4 bg-white/5 text-white border border-white/10 font-semibold rounded-xl hover:bg-white/10 hover:border-cyan-400/50 transition-all text-center backdrop-blur-sm animate-glow"
