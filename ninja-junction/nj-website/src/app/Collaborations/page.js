@@ -126,15 +126,11 @@ export default function Collaborations() {
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.8 }}
-                        className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8"
+                        className="mt-20 grid grid-cols-1 md:grid-cols-2 gap-8"
                     >
                         <div className="text-center p-8 bg-slate-900/30 backdrop-blur-xl rounded-2xl border border-white/10">
                             <div className="text-5xl font-bold text-[var(--color-primary)] mb-2">3+</div>
                             <div className="text-lg text-[var(--color-text-secondary)]">Active Partnerships</div>
-                        </div>
-                        <div className="text-center p-8 bg-slate-900/30 backdrop-blur-xl rounded-2xl border border-white/10">
-                            <div className="text-5xl font-bold text-[var(--color-primary)] mb-2">100+</div>
-                            <div className="text-lg text-[var(--color-text-secondary)]">Collaborative Projects</div>
                         </div>
                         <div className="text-center p-8 bg-slate-900/30 backdrop-blur-xl rounded-2xl border border-white/10">
                             <div className="text-5xl font-bold text-[var(--color-primary)] mb-2">500+</div>

@@ -10,9 +10,10 @@ export default function HolographicEventCard({ event, onClick, isPast = false })
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             whileHover={{ y: -5 }}
+            onClick={isPast ? onClick : undefined}
             className={`
                 relative rounded-2xl overflow-hidden group
-                ${isPast ? 'bg-slate-900/40 opacity-70 hover:opacity-100' : 'bg-slate-900/60'}
+                ${isPast ? 'bg-slate-900/40 opacity-70 hover:opacity-100 cursor-pointer' : 'bg-slate-900/60'}
                 border border-white/10 backdrop-blur-md
             `}
         >
@@ -61,12 +62,9 @@ export default function HolographicEventCard({ event, onClick, isPast = false })
                 </p>
 
                 {isPast ? (
-                    <button
-                        className="w-full py-2 rounded-lg bg-white/5 text-slate-400 cursor-not-allowed border border-white/5 text-sm font-medium"
-                        disabled
-                    >
-                        Event Concluded
-                    </button>
+                    <div className="w-full py-2 rounded-lg bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 text-sm font-medium text-center group-hover:bg-cyan-500/20 transition-all">
+                        View Event Details
+                    </div>
                 ) : (
                     <MagneticButton
                         className={`

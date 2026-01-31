@@ -70,7 +70,7 @@ const Contact = () => {
 
                             <h3 className="text-cyan-400 font-bold tracking-wider uppercase text-sm mb-2">Primary Channel</h3>
                             <div className="text-2xl font-bold text-white mb-1">Email</div>
-                            <div className="text-slate-400">team.ninjajunction@protonmail.com</div>
+                            <div className="text-slate-400">team@ninjajunction.com</div>
 
                             <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent" />
                         </motion.div>

@@ -6,14 +6,26 @@ import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import HolographicEventCard from '@/Components/HolographicEventCard';
 import GlitchText from '@/Components/GlitchText';
+import EventModal from '@/Components/EventModal';
+import { useState } from 'react';
 
 export default function Events() {
     const router = useRouter();
+    const [selectedEvent, setSelectedEvent] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const handleRedirect = (link) => {
-        if (link) {
-            router.push(link);
+    const handleEventClick = (event) => {
+        if (event.link) {
+            router.push(event.link);
+        } else {
+            setSelectedEvent(event);
+            setIsModalOpen(true);
         }
+    }
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+        setTimeout(() => setSelectedEvent(null), 300);
     }
 
     return (
@@ -39,7 +51,7 @@ export default function Events() {
                             <HolographicEventCard
                                 key={event.id}
                                 event={event}
-                                onClick={(e) => handleRedirect(event.link)}
+                                onClick={() => handleEventClick(event)}
                             />
                         ))}
                     </div>
@@ -62,13 +74,20 @@ export default function Events() {
                             <HolographicEventCard
                                 key={event.id}
                                 event={event}
-                                onClick={(e) => handleRedirect(event.link)}
+                                onClick={() => handleEventClick(event)}
                                 isPast={true}
                             />
                         ))}
                     </div>
                 </div>
             </section>
+
+            {/* Event Modal */}
+            <EventModal
+                event={selectedEvent}
+                isOpen={isModalOpen}
+                onClose={closeModal}
+            />
         </main>
     );
 }

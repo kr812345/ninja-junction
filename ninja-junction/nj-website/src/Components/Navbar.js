@@ -17,7 +17,6 @@ export default function Navbar() {
 
     const menus = [
         { name: 'Home', link: '/' },
-        { name: 'Projects', link: '/Projects' },
         { name: 'Events', link: '/Events' },
         { name: 'Collaborations', link: '/Collaborations' },
         { name: 'About', link: '/About' },

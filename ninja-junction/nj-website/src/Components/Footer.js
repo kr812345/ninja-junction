@@ -79,6 +79,19 @@ export default function Footer() {
                             Join our community to participate in events, hackathons, and build amazing projects together.
                         </p>
 
+                        {/* Email Contact */}
+                        <div className="mb-6">
+                            <a
+                                href="mailto:team@ninjajunction.com"
+                                className="inline-flex items-center gap-2 text-[var(--color-text-secondary)] hover:text-[var(--color-primary)] transition-colors group"
+                            >
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg>
+                                <span className="font-medium">team@ninjajunction.com</span>
+                            </a>
+                        </div>
+
                         {/* Social Links */}
                         <div className="flex gap-4">
                             {socialLinks.map((social) => (

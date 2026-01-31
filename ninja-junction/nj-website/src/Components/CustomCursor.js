@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
-export default function CustomCursor() {
+export default function CustomCursor({ hide = false }) {
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
     const [isPointer, setIsPointer] = useState(false);
 
@@ -29,6 +29,8 @@ export default function CustomCursor() {
             window.removeEventListener('mouseover', updateCursorType);
         };
     }, []);
+
+    if (hide) return null;
 
     return (
         <>
