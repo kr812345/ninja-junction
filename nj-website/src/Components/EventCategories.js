@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 
 export default function EventCategories() {
     const categories = [
@@ -9,98 +9,131 @@ export default function EventCategories() {
             description: 'Hands-on learning sessions to build practical skills',
             icon: '🛠️',
             link: '/Events?category=workshop',
-            gradient: 'from-blue-500 to-cyan-500'
+            image: '/webdev-bootcamp.svg'
         },
         {
             title: 'Hackathons',
             description: 'Compete, collaborate, and create innovative solutions',
             icon: '💻',
             link: '/Events?category=hackathon',
-            gradient: 'from-purple-500 to-pink-500'
+            image: '/hackathon.svg'
         },
         {
             title: 'Meetups',
             description: 'Connect with like-minded students and build your network',
             icon: '🤝',
             link: '/Events?category=meetup',
-            gradient: 'from-green-500 to-emerald-500'
+            image: '/devfest.svg'
         },
         {
             title: 'Speaker Sessions',
             description: 'Learn from industry experts and thought leaders',
             icon: '🎤',
             link: '/Events?category=speaker',
-            gradient: 'from-orange-500 to-amber-500'
+            image: '/webinar.svg'
         }
     ];
 
-    return (
-        <section className="relative py-20 bg-[var(--color-background)] overflow-hidden">
-            {/* Background Effects */}
-            <div className="absolute top-1/2 left-1/4 w-[400px] h-[400px] bg-blue-600/10 rounded-full blur-[100px] -z-10" />
-            <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-purple-600/10 rounded-full blur-[100px] -z-10" />
+    // Rotation angles for tilted card effect
+    const rotations = [-4, 2, -2, 3];
 
-            <div className="max-w-7xl mx-auto px-6 lg:px-8">
-                {/* Section Heading */}
+    return (
+        <section className="relative py-24 bg-[var(--color-background)] overflow-hidden vignette">
+            {/* Background Effects */}
+            <div className="absolute top-1/2 left-1/4 w-[500px] h-[500px] bg-cyan-500/8 rounded-full blur-[120px]" />
+            <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-blue-600/6 rounded-full blur-[100px]" />
+
+            <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
+                {/* Section Heading — bold condensed */}
                 <motion.div
                     initial={{ y: 30, opacity: 0 }}
                     whileInView={{ y: 0, opacity: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
-                    className="text-center mb-16"
+                    className="text-center mb-20"
                 >
-                    <h2 className="text-4xl lg:text-5xl font-bold text-[var(--color-text-primary)] font-serif mb-4">
-                        Unifying Students <span className="text-[var(--color-primary)]">Across Colleges</span>
+                    <h2 className="bold-heading text-4xl md:text-6xl lg:text-7xl mb-4">
+                        EVENTS &<br />HACKATHONS
                     </h2>
+                    <p className="text-lg text-[var(--color-text-secondary)] font-serif italic max-w-xl mx-auto">
+                        Unifying students across colleges through unforgettable experiences
+                    </p>
                 </motion.div>
 
-                {/* Category Cards Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {/* Tilted Card Carousel — MoM style */}
+                <div className="flex flex-wrap lg:flex-nowrap justify-center gap-6 lg:gap-[-20px] items-center">
                     {categories.map((category, index) => (
                         <motion.div
                             key={category.title}
-                            initial={{ y: 50, opacity: 0 }}
-                            whileInView={{ y: 0, opacity: 1 }}
+                            initial={{ y: 60, opacity: 0, rotate: rotations[index] }}
+                            whileInView={{ y: 0, opacity: 1, rotate: rotations[index] }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.5, delay: index * 0.1 }}
+                            transition={{ duration: 0.6, delay: index * 0.12 }}
+                            className="w-full sm:w-[280px] lg:w-[260px] flex-shrink-0"
                         >
                             <Link href={category.link}>
                                 <motion.div
-                                    whileHover={{ y: -8, scale: 1.02 }}
-                                    className="relative h-full bg-slate-900/50 backdrop-blur-xl rounded-2xl border border-white/10 p-6 cursor-pointer group overflow-hidden"
+                                    whileHover={{
+                                        rotate: 0,
+                                        scale: 1.08,
+                                        y: -12,
+                                        zIndex: 10,
+                                        transition: { duration: 0.35 }
+                                    }}
+                                    className="relative bg-[var(--color-cta-bg)] rounded-3xl overflow-hidden shadow-xl cursor-pointer group"
+                                    style={{ transform: `rotate(${rotations[index]}deg)` }}
                                 >
-                                    {/* Gradient Overlay on Hover */}
-                                    <div className={`absolute inset-0 bg-gradient-to-br ${category.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300`} />
-
-                                    {/* Icon */}
-                                    <div className="relative mb-4">
-                                        <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${category.gradient} flex items-center justify-center text-3xl shadow-lg group-hover:shadow-xl transition-shadow`}>
+                                    {/* Image Section */}
+                                    <div className="relative h-48 overflow-hidden">
+                                        <img
+                                            src={category.image}
+                                            alt={category.title}
+                                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                        />
+                                        {/* Emoji overlay */}
+                                        <div className="absolute top-3 right-3 w-10 h-10 rounded-full bg-white/90 flex items-center justify-center text-xl shadow-md">
                                             {category.icon}
                                         </div>
                                     </div>
 
-                                    {/* Content */}
-                                    <div className="relative">
-                                        <h3 className="text-xl font-bold text-white mb-2 font-serif group-hover:text-[var(--color-primary)] transition-colors">
+                                    {/* Text Section */}
+                                    <div className="p-5">
+                                        <h3
+                                            className="text-xl font-bold text-[var(--color-cta-text)] mb-2"
+                                            style={{ fontFamily: 'var(--font-oswald)' }}
+                                        >
                                             {category.title}
                                         </h3>
-                                        <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed">
+                                        <p className="text-sm text-gray-600 leading-relaxed">
                                             {category.description}
                                         </p>
-                                    </div>
-
-                                    {/* Arrow Icon */}
-                                    <div className="relative mt-4 flex items-center text-[var(--color-primary)] opacity-0 group-hover:opacity-100 transition-opacity">
-                                        <span className="text-sm font-semibold">Learn More</span>
-                                        <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                        </svg>
                                     </div>
                                 </motion.div>
                             </Link>
                         </motion.div>
                     ))}
                 </div>
+
+                {/* Bottom CTA */}
+                <motion.div
+                    initial={{ y: 30, opacity: 0 }}
+                    whileInView={{ y: 0, opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.5 }}
+                    className="text-center mt-20"
+                >
+                    <h3 className="bold-heading text-3xl md:text-5xl mb-6">
+                        PLUS MORE<br />(LOTS MORE)
+                    </h3>
+                    <Link href="/Events" className="capsule-btn text-sm mx-auto inline-flex">
+                        <span className="btn-text">Explore All Events</span>
+                        <span className="btn-icon">
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                            </svg>
+                        </span>
+                    </Link>
+                </motion.div>
             </div>
         </section>
     );

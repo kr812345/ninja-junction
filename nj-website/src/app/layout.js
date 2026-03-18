@@ -1,8 +1,9 @@
-import { Inter, Merriweather } from "next/font/google";
+import { Inter, Merriweather, Oswald } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/Components/Navbar";
 import ScrollNavigator from "@/Components/ScrollNavigator";
 import LoadingScreen from "@/Components/LoadingScreen";
+import CursorTrail from "@/Components/CursorTrail";
 import { Toaster } from "react-hot-toast";
 
 const inter = Inter({
@@ -18,6 +19,13 @@ const merriweather = Merriweather({
   display: "swap",
 });
 
+const oswald = Oswald({
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
+  variable: "--font-oswald",
+  display: "swap",
+});
+
 export const metadata = {
   title: "Ninja Junction",
   description: "Ninja Junction is a tech community which collaborates with companies and govt. agencies for tech and research projects.",
@@ -28,9 +36,10 @@ export default function RootLayout({ children }) {
     <html lang="en" suppressHydrationWarning>
       <body
         suppressHydrationWarning
-        className={`${inter.variable} ${merriweather.variable} antialiased font-sans`}
+        className={`${inter.variable} ${merriweather.variable} ${oswald.variable} antialiased font-sans`}
       >
         <LoadingScreen>
+          <CursorTrail />
           <Navbar />
           <ScrollNavigator>
             {/* <PageTransition> */}

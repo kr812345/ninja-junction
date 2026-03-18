@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <!-- Code/terminal pixel art coin in hot pink — like MoMoney's $$ coin -->
+  <!-- Outer circle -->
+  <circle cx="60" cy="60" r="54" stroke="#FF69B4" stroke-width="4" fill="none"/>
+  <circle cx="60" cy="60" r="46" stroke="#FF69B4" stroke-width="2" fill="#FF69B4" opacity="0.12"/>
+  
+  <!-- NJ text (monospace pixel style) -->
+  <g fill="#FF69B4">
+    <!-- N -->
+    <rect x="32" y="40" width="6" height="40"/>
+    <rect x="38" y="44" width="6" height="6"/>
+    <rect x="44" y="50" width="6" height="6"/>
+    <rect x="50" y="56" width="6" height="6"/>
+    <rect x="56" y="40" width="6" height="40"/>
+    
+    <!-- J -->
+    <rect x="70" y="40" width="18" height="6"/>
+    <rect x="78" y="40" width="6" height="34"/>
+    <rect x="66" y="68" width="12" height="6"/>
+    <rect x="66" y="62" width="6" height="8"/>
+    <rect x="66" y="74" width="6" height="6"/>
+  </g>
+  
+  <!-- Small pixel sparkles -->
+  <rect x="20" y="20" width="4" height="4" fill="#FF69B4" opacity="0.6"/>
+  <rect x="96" y="24" width="4" height="4" fill="#FF69B4" opacity="0.6"/>
+  <rect x="16" y="90" width="4" height="4" fill="#FF69B4" opacity="0.6"/>
+  <rect x="100" y="92" width="4" height="4" fill="#FF69B4" opacity="0.6"/>
+</svg>

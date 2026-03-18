@@ -1,5 +1,5 @@
 'use client';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView } from 'motion/react';
 import { useRef, useState, useEffect, useMemo } from 'react';
 
 export default function CommunityMap() {
@@ -38,22 +38,19 @@ export default function CommunityMap() {
     // Generate deterministic positions for community spots
     const spots = useMemo(() => {
         const generatedSpots = [];
-        const colors = ['#2563EB', '#8B5CF6', '#06B6D4', '#3B82F6'];
+        const colors = ['#00d4ff', '#66e5ff', '#0099cc', '#00b8d4'];
 
         for (let i = 0; i < totalMembers; i++) {
-            // Constrain spots to be within map boundaries (25-75% range for tighter fit)
-            const x = seededRandom(i * 1.5) * 50 + 25; // 25-75 range
-            const y = seededRandom(i * 2.7) * 50 + 25; // 25-75 range
-            const size = seededRandom(i * 3.3) * 3 + 3; // Larger dots (3-6 range)
+            const x = seededRandom(i * 1.5) * 50 + 25;
+            const y = seededRandom(i * 2.7) * 50 + 25;
+            const size = seededRandom(i * 3.3) * 3 + 3;
 
             generatedSpots.push({
                 id: i,
-                // Use strings to ensure exact server-client matching
                 x: x.toFixed(10),
                 y: y.toFixed(10),
                 delay: i * 0.02,
                 size: size.toFixed(10),
-                // Pre-calculate and store as strings to avoid hydration errors
                 outerRadius: (size / 6).toFixed(10),
                 innerRadius: (size / 12).toFixed(10),
                 mainRadius: (size / 25).toFixed(10),
@@ -66,21 +63,21 @@ export default function CommunityMap() {
     return (
         <section ref={ref} className="relative py-24 bg-[var(--color-background)] overflow-hidden">
             {/* Background Effects */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-600/10 rounded-full blur-[150px] -z-10" />
-            <div className="absolute top-0 right-1/4 w-[400px] h-[400px] bg-purple-600/10 rounded-full blur-[120px] -z-10" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-cyan-500/8 rounded-full blur-[150px]" />
+            <div className="absolute top-0 right-1/4 w-[400px] h-[400px] bg-blue-600/6 rounded-full blur-[120px]" />
 
             <div className="max-w-7xl mx-auto px-6 lg:px-8">
-                {/* Section Header */}
+                {/* Section Header — Bold condensed */}
                 <motion.div
                     initial={{ y: 30, opacity: 0 }}
                     animate={isInView ? { y: 0, opacity: 1 } : {}}
                     transition={{ duration: 0.6 }}
                     className="text-center mb-16"
                 >
-                    <h2 className="text-4xl lg:text-5xl font-bold text-[var(--color-text-primary)] font-serif mb-4">
-                        Our Growing <span className="text-[var(--color-primary)]">Community</span>
+                    <h2 className="bold-heading text-4xl md:text-6xl lg:text-7xl mb-4">
+                        OUR GROWING<br />COMMUNITY
                     </h2>
-                    <p className="text-lg text-[var(--color-text-secondary)] max-w-2xl mx-auto">
+                    <p className="text-lg text-[var(--color-text-secondary)] font-serif italic max-w-2xl mx-auto">
                         Students from across Delhi University connecting, collaborating, and creating together
                     </p>
                 </motion.div>
@@ -94,9 +91,15 @@ export default function CommunityMap() {
                         transition={{ duration: 0.8, delay: 0.2 }}
                         className="lg:col-span-3 relative"
                     >
-                        <div className="relative bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 rounded-3xl border border-slate-200 p-8 lg:p-12 overflow-hidden shadow-2xl">
-                            {/* Subtle overlay */}
-                            <div className="absolute inset-0 bg-white/30" />
+                        <div className="relative bg-gradient-to-br from-[#0c1d3d] via-[#0f2347] to-[#0c1d3d] rounded-3xl border border-white/5 p-8 lg:p-12 overflow-hidden shadow-2xl">
+                            {/* Subtle grid overlay */}
+                            <div
+                                className="absolute inset-0 opacity-5"
+                                style={{
+                                    backgroundImage: 'radial-gradient(circle, rgba(0,212,255,0.3) 1px, transparent 1px)',
+                                    backgroundSize: '30px 30px'
+                                }}
+                            />
 
                             {/* Delhi Map Container */}
                             <div className="relative w-full aspect-[5/6]">
@@ -106,10 +109,10 @@ export default function CommunityMap() {
                                     alt="Delhi Map"
                                     className="w-full h-full object-contain relative z-10"
                                     style={{
-                                        filter: 'drop-shadow(0 0 10px rgba(0, 0, 0, 0.1))'
+                                        filter: 'drop-shadow(0 0 15px rgba(0, 212, 255, 0.2)) brightness(1.1) contrast(1.1)',
                                     }}
                                     initial={{ opacity: 0, scale: 0.95 }}
-                                    animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                                    animate={isInView ? { opacity: 0.8, scale: 1 } : {}}
                                     transition={{ duration: 1.5, ease: "easeOut" }}
                                 />
 
@@ -121,7 +124,6 @@ export default function CommunityMap() {
                                 >
                                     {spots.map((spot) => (
                                         <motion.g key={spot.id}>
-                                            {/* Outer glow ring */}
                                             <motion.circle
                                                 cx={spot.x}
                                                 cy={spot.y}
@@ -140,7 +142,6 @@ export default function CommunityMap() {
                                                     repeatDelay: 1.5
                                                 }}
                                             />
-                                            {/* Inner glow effect */}
                                             <motion.circle
                                                 cx={spot.x}
                                                 cy={spot.y}
@@ -159,7 +160,6 @@ export default function CommunityMap() {
                                                     repeatDelay: 2
                                                 }}
                                             />
-                                            {/* Main dot with shimmer */}
                                             <motion.circle
                                                 cx={spot.x}
                                                 cy={spot.y}
@@ -181,7 +181,7 @@ export default function CommunityMap() {
                                                 }}
                                                 className="cursor-pointer"
                                                 style={{
-                                                    filter: 'drop-shadow(0 0 3px rgba(255, 255, 255, 0.8))'
+                                                    filter: 'drop-shadow(0 0 4px rgba(0, 212, 255, 0.6))'
                                                 }}
                                             />
                                         </motion.g>
@@ -199,13 +199,14 @@ export default function CommunityMap() {
                         className="lg:col-span-2 space-y-6"
                     >
                         {/* Member Count */}
-                        <div className="bg-slate-900/50 backdrop-blur-xl rounded-2xl border border-white/10 p-8 text-center">
+                        <div className="glass-card p-8 text-center">
                             <motion.div
-                                className="text-6xl lg:text-7xl font-bold bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 bg-clip-text text-transparent font-serif"
+                                className="text-6xl lg:text-7xl font-bold text-[var(--color-primary)]"
+                                style={{ fontFamily: 'var(--font-oswald)' }}
                             >
                                 {count}+
                             </motion.div>
-                            <p className="text-[var(--color-text-secondary)] mt-3 text-lg">
+                            <p className="text-[var(--color-text-secondary)] mt-3 text-lg font-serif italic">
                                 Active Members
                             </p>
                         </div>
@@ -223,9 +224,12 @@ export default function CommunityMap() {
                                     initial={{ y: 20, opacity: 0 }}
                                     animate={isInView ? { y: 0, opacity: 1 } : {}}
                                     transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
-                                    className="bg-slate-900/30 backdrop-blur-xl rounded-xl border border-white/5 p-4 text-center"
+                                    className="glass-card p-4 text-center"
                                 >
-                                    <div className="text-2xl font-bold text-[var(--color-primary)] font-serif">
+                                    <div
+                                        className="text-2xl font-bold text-[var(--color-primary)]"
+                                        style={{ fontFamily: 'var(--font-oswald)' }}
+                                    >
                                         {stat.value}
                                     </div>
                                     <p className="text-sm text-[var(--color-text-secondary)] mt-1">
@@ -236,16 +240,20 @@ export default function CommunityMap() {
                         </div>
 
                         {/* CTA */}
-                        <motion.a
-                            href="/Join"
+                        <motion.div
                             initial={{ y: 20, opacity: 0 }}
                             animate={isInView ? { y: 0, opacity: 1 } : {}}
                             transition={{ duration: 0.5, delay: 1 }}
-                            whileHover={{ scale: 1.05, y: -2 }}
-                            className="block w-full px-6 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl text-center shadow-lg hover:shadow-xl transition-all duration-300"
                         >
-                            Join Our Community
-                        </motion.a>
+                            <a href="/Join" className="capsule-btn w-full text-sm">
+                                <span className="btn-text flex-1 text-center">Join Our Community</span>
+                                <span className="btn-icon">
+                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                                    </svg>
+                                </span>
+                            </a>
+                        </motion.div>
                     </motion.div>
                 </div>
             </div>

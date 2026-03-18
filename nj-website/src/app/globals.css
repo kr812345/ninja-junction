@@ -5,6 +5,7 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-inter);
   --font-serif: var(--font-merriweather);
+  --font-display: var(--font-oswald);
 }
 
 body {
@@ -13,49 +14,349 @@ body {
   font-family: var(--font-inter);
 }
 
-@theme {
-  /* 🎨 Colors - Premium Dark Theme */
-  --color-primary: #2563EB;
-  /* Premium Royal Blue */
-  --color-primary-dark: #1E40AF;
-  --color-primary-light: #60A5FA;
-
-  --color-accent-yellow: #FACC15;
-  --color-accent-green: #22C55E;
-  --color-accent-red: #EF4444;
-
-  --color-text-primary: #F8FAFC;
-  /* Slate 50 */
-  --color-text-secondary: #94A3B8;
-  /* Slate 400 */
-
-  --color-border: #1E293B;
-  /* Slate 800 */
-  --color-background: #020617;
-  /* Slate 950 - Deep Premium Dark */
-  --color-surface: #0F172A;
-  /* Slate 900 */
-
-  /* ✍️ Fonts */
-  --font-heading: var(--font-merriweather);
-  --font-body: var(--font-inter);
-
-  /*  Radius */
-  --radius-card: 20px;
-  --radius-button: 12px;
-
-  /* 🌑 Shadows */
-  --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
-  --shadow-glow: 0 0 20px rgba(37, 99, 235, 0.5);
+img, svg {
+  -webkit-user-drag: none;
+  user-select: none;
+  pointer-events: none;
 }
 
-@layer utilities {
-  .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-blue-200 to-blue-400;
+/* ==========================================
+   🟢 SAVED GREEN THEME (MoMoney-Inspired)
+   ==========================================
+@theme {
+  --color-primary: #1CE585;
+  --color-primary-dark: #00CC5A;
+  --color-primary-light: #66FF9E;
+  --color-accent-pink: #FF69B4;
+  --color-accent-yellow: #ffd700;
+  --color-accent-red: #ff4757;
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #1CE585;
+  --color-border: #1A4D33;
+  --color-background: #00592B;
+  --color-background-alt: #004A23;
+  --color-surface: #006B34;
+  --color-surface-light: #007A3E;
+  --color-cta-bg: #E8E6DF;
+  --color-cta-text: #0A0A0A;
+  --font-heading: var(--font-oswald);
+  --font-body: var(--font-inter);
+  --font-accent: var(--font-merriweather);
+  --radius-card: 24px;
+  --radius-button: 9999px;
+  --radius-card-sm: 16px;
+  --shadow-card: 0 10px 40px -10px rgba(0, 0, 0, 0.6);
+  --shadow-glow: 0 0 30px rgba(28, 229, 133, 0.3);
+  --shadow-glow-strong: 0 0 60px rgba(28, 229, 133, 0.5);
+}
+*/
+
+@theme {
+  /* 🔮 Obsidian + Lavender Purple Theme */
+  --color-primary: #A78BFA;
+  /* Soft purple — buttons, links, interactive */
+  --color-primary-dark: #8B5CF6;
+  --color-primary-light: #C4B5FD;
+
+  --color-accent-pink: #34D399;
+  /* Emerald green accent */
+  --color-accent-yellow: #FBBF24;
+  --color-accent-red: #F87171;
+
+  --color-text-primary: #EEEDF5;
+  /* Lavender white — headings */
+  --color-text-secondary: #8B85A1;
+  /* Muted purple — body text */
+
+  --color-border: #2A2640;
+  --color-background: #13111C;
+  /* Deep purple-black — main bg */
+  --color-background-alt: #1A1726;
+  /* Slightly lighter for alt sections */
+  --color-surface: #1E1B2E;
+  /* Card/surface purple */
+  --color-surface-light: #252238;
+
+  --color-cta-bg: #A78BFA;
+  /* Purple button background */
+  --color-cta-text: #13111C;
+  /* Dark button text */
+
+  /* ✍️ Fonts */
+  --font-heading: var(--font-oswald);
+  --font-body: var(--font-inter);
+  --font-accent: var(--font-merriweather);
+
+  /* 🔘 Radius */
+  --radius-card: 24px;
+  --radius-button: 9999px;
+  --radius-card-sm: 16px;
+
+  /* 🌑 Shadows */
+  --shadow-card: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 30px rgba(167, 139, 250, 0.2);
+  --shadow-glow-strong: 0 0 60px rgba(167, 139, 250, 0.35);
+}
+
+/* ==========================================
+   💊 CAPSULE BUTTON — slide-reveal arrow CTA
+   ========================================== */
+.capsule-btn {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  overflow: hidden;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.7rem;
+  transition:
+    transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.4s ease;
+  cursor: pointer;
+}
+
+.capsule-btn .btn-text {
+  padding: 0.6rem 1.4rem;
+  background: var(--color-cta-bg);
+  color: var(--color-cta-text);
+  transition: background 0.35s ease, color 0.35s ease;
+}
+
+.capsule-btn .btn-icon {
+  width: 0;
+  padding: 0;
+  overflow: hidden;
+  background: #8B5CF6;
+  color: #13111C;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+    padding 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+    opacity 0.3s ease;
+  opacity: 0;
+}
+
+.capsule-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(167, 139, 250, 0.35);
+}
+
+.capsule-btn:hover .btn-text {
+  background: #8B5CF6;
+  color: #EEEDF5;
+}
+
+.capsule-btn:hover .btn-icon {
+  width: 36px;
+  padding: 0.6rem 0;
+  opacity: 1;
+  background: #7C3AED;
+}
+
+/* Slightly bigger variant for hero CTA */
+.capsule-btn-lg .btn-text {
+  padding: 0.75rem 1.5rem;
+  font-size: 0.75rem;
+}
+
+.capsule-btn-lg .btn-icon {
+  padding: 0.75rem 1rem;
+}
+
+/* ==========================================
+   🏷️ NAV PILL — premium hover style
+   ========================================== */
+.nav-pill {
+  --elastic-ease: linear(
+    0, 0.5737 7.6%, 0.8382 11.87%, 0.9463 14.19%,
+    1.0292 16.54%, 1.0886 18.97%, 1.1258 21.53%,
+    1.137 22.97%, 1.1424 24.48%, 1.1423 26.1%,
+    1.1366 27.86%, 1.1165 31.01%, 1.0507 38.62%,
+    1.0219 42.57%, 0.9995 46.99%, 0.9872 51.63%,
+    0.9842 58.77%, 1.0011 81.26%, 1
+  );
+  position: relative;
+  padding: 0.5rem 1.2rem;
+  border-radius: 9999px;
+  background: rgba(167, 139, 250, 0.08);
+  border: 1px solid rgba(167, 139, 250, 0.12);
+  color: var(--color-text-primary);
+  font-weight: 600;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition:
+    background 0.45s var(--elastic-ease),
+    color 0.3s cubic-bezier(0.216, 0.62, 0.356, 1),
+    border-color 0.3s ease,
+    transform 0.45s var(--elastic-ease);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.nav-pill:hover {
+  background: rgba(167, 139, 250, 0.95);
+  color: #13111C;
+  border-color: rgba(167, 139, 250, 0.9);
+  transform: scale(1.04);
+}
+
+.nav-pill:active {
+  transform: scale(0.96);
+}
+
+.nav-pill.active {
+  background: rgba(167, 139, 250, 0.95);
+  border-color: rgba(167, 139, 250, 0.9);
+  color: #13111C;
+}
+
+/* ==========================================
+   🎠 MARQUEE TICKER — infinite scroll
+   ========================================== */
+.marquee-container {
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+}
+
+.marquee-track {
+  display: inline-flex;
+  animation: marquee-scroll 20s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0);
   }
 
-  .glass-card {
-    @apply bg-white/5 backdrop-blur-lg border border-white/10;
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* ==========================================
+   🃏 TILTED CARD — rotated card style  
+   ========================================== */
+.tilted-card {
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-card);
+}
+
+.tilted-card:nth-child(1) {
+  transform: rotate(-4deg);
+}
+
+.tilted-card:nth-child(2) {
+  transform: rotate(2deg);
+}
+
+.tilted-card:nth-child(3) {
+  transform: rotate(-2deg);
+}
+
+.tilted-card:nth-child(4) {
+  transform: rotate(3deg);
+}
+
+.tilted-card:nth-child(5) {
+  transform: rotate(-1deg);
+}
+
+.tilted-card:hover {
+  transform: rotate(0deg) scale(1.05) translateY(-8px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  z-index: 10;
+}
+
+/* ==========================================
+   🔤 BOLD HEADING — Display typography
+   ========================================== */
+.bold-heading {
+  font-family: var(--font-oswald);
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--color-text-primary);
+}
+
+.bold-heading-xl {
+  font-family: var(--font-oswald);
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+  color: var(--color-text-primary);
+  font-size: clamp(3.5rem, 12vw, 10rem);
+}
+
+/* ==========================================
+   🔮 GLASS CARD — obsidian purple theme
+   ========================================== */
+.glass-card {
+  background: rgba(30, 27, 46, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(167, 139, 250, 0.08);
+  border-radius: var(--radius-card);
+}
+
+.glass-card:hover {
+  background: rgba(30, 27, 46, 0.8);
+  border-color: rgba(167, 139, 250, 0.2);
+}
+
+/* ==========================================
+   🥷 HERO FLOATING ICONS — resistive animation
+   ========================================== */
+.hero-floating-icon {
+  position: absolute;
+  will-change: transform;
+  transition: transform 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  pointer-events: none;
+  z-index: 5;
+}
+
+.hero-floating-icon img,
+.hero-floating-icon svg {
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+}
+
+/* ==========================================
+   🖱️ CUSTOM CURSOR DOT (MoMoney style)
+   ========================================== */
+.cursor-dot {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  background: var(--color-primary);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+  mix-blend-mode: difference;
+  transition: transform 0.1s ease-out;
+}
+
+/* ==========================================
+   ✨ UTILITY ANIMATIONS
+   ========================================== */
+@layer utilities {
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-violet-300 to-purple-400;
+  }
+
+  .gradient-text-warm {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 via-green-300 to-emerald-400;
   }
 
   .animate-shimmer {
@@ -64,6 +365,14 @@ body {
 
   .animate-shine {
     animation: shine 1.5s ease-in-out infinite;
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-float-delayed {
+    animation: float 6s ease-in-out infinite 2s;
   }
 
   @keyframes shimmer {
@@ -85,4 +394,45 @@ body {
       transform: translateX(100%);
     }
   }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+
+    33% {
+      transform: translateY(-10px) rotate(2deg);
+    }
+
+    66% {
+      transform: translateY(5px) rotate(-1deg);
+    }
+  }
+}
+
+/* ==========================================
+   📱 SMOOTH SCROLLBAR for dark theme
+   ========================================== */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-surface-light);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-dark);
+}
+
+/* Selection color */
+::selection {
+  background: rgba(167, 139, 250, 0.3);
+  color: #fff;
 }
