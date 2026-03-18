@@ -17,7 +17,7 @@ const FLOATING_ICONS = [
     {
         src: '/code-pixel.svg',
         alt: 'NJ coin',
-        style: { bottom: '-25%', left: '1%' },
+        style: { bottom: '-25%', left: '1%', zIndex: 12 },
         size: { w: 100, h: 100 },
         mdSize: 'w-[70px] h-[70px] md:w-[100px] md:h-[100px] lg:w-[130px] lg:h-[130px]',
         baseRotate: -10,
@@ -143,6 +143,43 @@ export default function Hero() {
                 z-15 = Subtitle + CTA (topmost)
                ============================================ */}
 
+            {/* Premium crystal grid background */}
+            <div className="absolute inset-0 z-0">
+                {/* Square grid pattern */}
+                <div
+                    className="absolute inset-0 opacity-[0.12]"
+                    style={{
+                        backgroundImage: `
+                            linear-gradient(to right, #4F46E5 1px, transparent 1px),
+                            linear-gradient(to bottom, #4F46E5 1px, transparent 1px)
+                        `,
+                        backgroundSize: '30px 30px',
+                    }}
+                />
+
+                {/* Ambient gradient orbs */}
+                <div className="absolute top-[10%] right-[15%] w-[500px] h-[500px] bg-indigo-500/[0.12] rounded-full blur-[120px]" />
+                <div className="absolute bottom-[10%] left-[10%] w-[400px] h-[400px] bg-cyan-500/[0.10] rounded-full blur-[100px]" />
+                <div className="absolute top-[40%] left-[40%] w-[300px] h-[300px] bg-indigo-400/[0.08] rounded-full blur-[80px]" />
+
+                {/* Radial vignette — fades grid at edges */}
+                <div
+                    className="absolute inset-0"
+                    style={{
+                        background: 'radial-gradient(ellipse at center, transparent 40%, var(--color-background) 80%)',
+                    }}
+                />
+
+                {/* Fine dot grid overlay for extra texture */}
+                <div
+                    className="absolute inset-0 opacity-[0.08]"
+                    style={{
+                        backgroundImage: 'radial-gradient(circle, #4F46E5 1px, transparent 1px)',
+                        backgroundSize: '20px 20px',
+                    }}
+                />
+            </div>
+
             <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-8 w-full">
                 <motion.div
                     initial={{ y: 40, opacity: 0 }}
@@ -165,8 +202,8 @@ export default function Hero() {
                             </h1>
                         </motion.div>
 
-                        {/* MIDDLE LAYER (z-5): Floating icons sit here between heading lines */}
-                        <div className="absolute inset-0 z-[5] pointer-events-none">
+                        {/* MIDDLE LAYER (z-15): Floating icons sit here ABOVE heading lines */}
+                        <div className="absolute inset-0 z-[15] pointer-events-none">
                             {FLOATING_ICONS.map((icon, i) => (
                                 <FloatingIcon
                                     key={icon.alt}
@@ -179,9 +216,9 @@ export default function Hero() {
 
                         {/* Hero image — also in middle layer */}
                         <motion.div
-                            className="relative z-[5] flex justify-center -mt-6 mb-[-3rem] md:-mt-8 md:mb-[-5rem]"
+                            className="relative z-[5] flex justify-center -mt-10 mb-[-3.5rem] md:-mt-14 md:mb-[-5.5rem]"
                             initial={{ rotate: -10, scale: 0 }}
-                            animate={{ rotate: -3, scale: 1 }}
+                            animate={{ rotate: -5, scale: 1 }}
                             transition={{ duration: 0.6, delay: 0.5, type: "spring" }}
                         >
                             <Image
@@ -189,7 +226,7 @@ export default function Hero() {
                                 alt="Tech illustration"
                                 width={280}
                                 height={160}
-                                className="rounded-xl object-cover w-[180px] h-[100px] md:w-[280px] md:h-[160px] shadow-lg shadow-black/30"
+                                className="rounded-xl object-cover w-[180px] h-[100px] md:w-[280px] md:h-[160px] shadow-lg shadow-black/10"
                             />
                         </motion.div>
 
@@ -213,7 +250,7 @@ export default function Hero() {
                         transition={{ duration: 0.6, delay: 0.4 }}
                         className="relative z-[15] text-base lg:text-lg text-[var(--color-text-secondary)] font-sans max-w-lg leading-relaxed mb-8 font-medium"
                     >
-                        Connecting students across Delhi colleges through tech,
+                        Connecting students across India through tech,
                         creativity, and collaboration
                     </motion.p>
 
@@ -224,7 +261,7 @@ export default function Hero() {
                         transition={{ duration: 0.6, delay: 0.6 }}
                         className="relative z-[15] flex flex-col sm:flex-row gap-3 items-center"
                     >
-                        <Link href="/Join" className="capsule-btn capsule-btn-lg">
+                        <Link href="https://chat.whatsapp.com/KCMrNnAQgBNBZaZ3WxorTm" target="_blank" className="capsule-btn capsule-btn-lg">
                             <span className="btn-text">Join Community</span>
                             <span className="btn-icon">
                                 <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

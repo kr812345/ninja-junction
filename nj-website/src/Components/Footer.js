@@ -14,7 +14,7 @@ export default function Footer() {
             { name: 'Contact', href: '/Contact' }
         ],
         Community: [
-            { name: 'Join Community', href: '/Join' },
+            { name: 'Join Community', href: 'https://chat.whatsapp.com/KCMrNnAQgBNBZaZ3WxorTm' },
             { name: 'Sign Up', href: '/Signup' },
             { name: 'Login', href: '/Login' }
         ]
@@ -51,30 +51,84 @@ export default function Footer() {
     ];
 
     return (
-        <footer className="relative bg-[var(--color-surface)] border-t border-white/5 overflow-hidden">
+        <footer className="relative bg-[var(--color-surface)] border-t border-black/5 overflow-hidden">
             {/* Background Effects */}
-            <div className="absolute top-0 left-1/4 w-[400px] h-[400px] bg-cyan-600/5 rounded-full blur-[100px]" />
-            <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-blue-600/5 rounded-full blur-[100px]" />
+            <div className="absolute top-0 left-1/4 w-[400px] h-[400px] bg-indigo-500/8 rounded-full blur-[100px]" />
+            <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-cyan-500/6 rounded-full blur-[100px]" />
 
-            {/* Top CTA Section — MoM "PLUS MORE" style */}
-            <div className="relative py-20 text-center">
-                <h2
-                    className="bold-heading-xl mb-8"
+            {/* Full-Screen "Ready to Join" CTA Section */}
+            <div className="relative h-screen flex flex-col items-center justify-center text-center px-6 overflow-hidden">
+
+                {/* Background decorative elements */}
+                <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-indigo-500/10 rounded-full blur-[150px]" />
+                <div className="absolute bottom-1/4 right-1/3 w-[400px] h-[400px] bg-cyan-500/8 rounded-full blur-[120px]" />
+
+                {/* Decorative pixel blocks — top-left */}
+                <motion.div
+                    initial={{ scale: 0, opacity: 0 }}
+                    whileInView={{ scale: 1, opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3, type: 'spring', bounce: 0.4 }}
+                    className="absolute top-[15%] left-[8%] flex flex-col gap-2"
                 >
-                    READY TO<br />JOIN THE CREW?
-                </h2>
-                <Link href="/Join" className="capsule-btn text-sm mx-auto">
-                    <span className="btn-text">Become a Member</span>
-                    <span className="btn-icon">
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                        </svg>
-                    </span>
-                </Link>
+                    <div className="w-12 h-12 rounded bg-[var(--color-primary)] shadow-lg shadow-indigo-500/20" />
+                    <div className="w-7 h-7 rounded bg-[var(--color-primary)]/70 ml-6" />
+                </motion.div>
+
+                {/* Decorative pixel blocks — bottom-right */}
+                <motion.div
+                    initial={{ scale: 0, opacity: 0 }}
+                    whileInView={{ scale: 1, opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.4, type: 'spring', bounce: 0.4 }}
+                    className="absolute bottom-[15%] right-[8%] flex flex-col items-end gap-2"
+                >
+                    <div className="w-7 h-7 rounded bg-[var(--color-primary)]/70 mr-6" />
+                    <div className="w-12 h-12 rounded bg-[var(--color-primary)] shadow-lg shadow-indigo-500/20" />
+                </motion.div>
+
+                {/* Main heading */}
+                <motion.div
+                    initial={{ y: 50, opacity: 0 }}
+                    whileInView={{ y: 0, opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.7 }}
+                >
+                    <h2 className="bold-heading text-6xl md:text-8xl lg:text-9xl mb-6">
+                        READY TO<br />JOIN THE<br />CREW?
+                    </h2>
+                </motion.div>
+
+                {/* Subtitle */}
+                <motion.p
+                    initial={{ y: 30, opacity: 0 }}
+                    whileInView={{ y: 0, opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.2 }}
+                    className="text-lg md:text-xl text-[var(--color-text-secondary)] font-serif italic max-w-lg mx-auto mb-10"
+                >
+                    Be part of India&apos;s most vibrant student tech community
+                </motion.p>
+
+                {/* CTA Button */}
+                <motion.div
+                    initial={{ y: 20, opacity: 0 }}
+                    whileInView={{ y: 0, opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.4 }}
+                >
+                    <button
+                        onClick={() => window.open('https://chat.whatsapp.com/KCMrNnAQgBNBZaZ3WxorTm', '_blank')}
+                        className="inline-block px-4 py-2 bg-[var(--color-primary)] text-white font-semibold text-base uppercase tracking-wider rounded-full hover:bg-[var(--color-primary-dark)] hover:shadow-[0_8px_24px_rgba(79,70,229,0.3)] hover:-translate-y-1 transition-all duration-300"
+                        style={{ fontFamily: 'var(--font-oswald)' }}
+                    >
+                        Become a Member →
+                    </button>
+                </motion.div>
             </div>
 
             {/* Footer Content */}
-            <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16 border-t border-white/5">
+            <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16 border-t border-black/5">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
                     {/* Brand Section */}
                     <div className="lg:col-span-2">
@@ -101,7 +155,7 @@ export default function Footer() {
                             </div>
                         </Link>
                         <p className="text-[var(--color-text-secondary)] mb-6 max-w-md leading-relaxed">
-                            Connecting students across Delhi colleges through tech, creativity, and collaboration.
+                            Connecting students across India through tech, creativity, and collaboration.
                             Join our community to participate in events, hackathons, and build amazing projects together.
                         </p>
 
@@ -114,7 +168,7 @@ export default function Footer() {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     whileHover={{ y: -4, scale: 1.1 }}
-                                    className="w-11 h-11 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-[var(--color-text-secondary)] hover:text-[var(--color-primary)] hover:bg-[var(--color-primary)]/10 hover:border-[var(--color-primary)]/30 transition-all duration-300"
+                                    className="w-11 h-11 rounded-full bg-black/[0.03] border border-black/8 flex items-center justify-center text-[var(--color-text-secondary)] hover:text-[var(--color-primary)] hover:bg-[var(--color-primary)]/10 hover:border-[var(--color-primary)]/30 transition-all duration-300"
                                     aria-label={social.name}
                                 >
                                     {social.icon}
@@ -149,7 +203,7 @@ export default function Footer() {
                 </div>
 
                 {/* Bottom Bar */}
-                <div className="pt-8 border-t border-white/5">
+                <div className="pt-8 border-t border-black/5">
                     <div className="flex flex-col md:flex-row justify-between items-center gap-4">
                         <p className="text-[var(--color-text-secondary)] text-sm">
                             © {currentYear} Ninja Junction. All rights reserved.

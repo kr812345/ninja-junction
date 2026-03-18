@@ -38,7 +38,7 @@ export default function CommunityMap() {
     // Generate deterministic positions for community spots
     const spots = useMemo(() => {
         const generatedSpots = [];
-        const colors = ['#00d4ff', '#66e5ff', '#0099cc', '#00b8d4'];
+        const colors = ['#4F46E5', '#818CF8', '#4338CA', '#06B6D4'];
 
         for (let i = 0; i < totalMembers; i++) {
             const x = seededRandom(i * 1.5) * 50 + 25;
@@ -63,8 +63,8 @@ export default function CommunityMap() {
     return (
         <section ref={ref} className="relative py-24 bg-[var(--color-background)] overflow-hidden">
             {/* Background Effects */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-cyan-500/8 rounded-full blur-[150px]" />
-            <div className="absolute top-0 right-1/4 w-[400px] h-[400px] bg-blue-600/6 rounded-full blur-[120px]" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-indigo-500/8 rounded-full blur-[150px]" />
+            <div className="absolute top-0 right-1/4 w-[400px] h-[400px] bg-cyan-500/6 rounded-full blur-[120px]" />
 
             <div className="max-w-7xl mx-auto px-6 lg:px-8">
                 {/* Section Header — Bold condensed */}
@@ -78,7 +78,7 @@ export default function CommunityMap() {
                         OUR GROWING<br />COMMUNITY
                     </h2>
                     <p className="text-lg text-[var(--color-text-secondary)] font-serif italic max-w-2xl mx-auto">
-                        Students from across Delhi University connecting, collaborating, and creating together
+                        Students from across India connecting, collaborating, and creating together
                     </p>
                 </motion.div>
 
@@ -91,25 +91,25 @@ export default function CommunityMap() {
                         transition={{ duration: 0.8, delay: 0.2 }}
                         className="lg:col-span-3 relative"
                     >
-                        <div className="relative bg-gradient-to-br from-[#0c1d3d] via-[#0f2347] to-[#0c1d3d] rounded-3xl border border-white/5 p-8 lg:p-12 overflow-hidden shadow-2xl">
+                        <div className="relative bg-gradient-to-br from-[#EEF2FF] via-[#F6F8FB] to-[#EEF2FF] rounded-3xl border border-[#E2E8F0] p-8 lg:p-12 overflow-hidden shadow-lg">
                             {/* Subtle grid overlay */}
                             <div
                                 className="absolute inset-0 opacity-5"
                                 style={{
-                                    backgroundImage: 'radial-gradient(circle, rgba(0,212,255,0.3) 1px, transparent 1px)',
+                                    backgroundImage: 'radial-gradient(circle, rgba(79,70,229,0.15) 1px, transparent 1px)',
                                     backgroundSize: '30px 30px'
                                 }}
                             />
 
                             {/* Delhi Map Container */}
                             <div className="relative w-full aspect-[5/6]">
-                                {/* Delhi Map Image */}
+                                {/* India Map Image */}
                                 <motion.img
                                     src="/Delhi Map Outline.png"
-                                    alt="Delhi Map"
+                                    alt="India Map"
                                     className="w-full h-full object-contain relative z-10"
                                     style={{
-                                        filter: 'drop-shadow(0 0 15px rgba(0, 212, 255, 0.2)) brightness(1.1) contrast(1.1)',
+                                        filter: 'drop-shadow(0 0 15px rgba(79, 70, 229, 0.15)) brightness(1.05) contrast(1.05)',
                                     }}
                                     initial={{ opacity: 0, scale: 0.95 }}
                                     animate={isInView ? { opacity: 0.8, scale: 1 } : {}}
@@ -181,7 +181,7 @@ export default function CommunityMap() {
                                                 }}
                                                 className="cursor-pointer"
                                                 style={{
-                                                    filter: 'drop-shadow(0 0 4px rgba(0, 212, 255, 0.6))'
+                                                    filter: 'drop-shadow(0 0 4px rgba(79, 70, 229, 0.4))'
                                                 }}
                                             />
                                         </motion.g>
@@ -245,7 +245,7 @@ export default function CommunityMap() {
                             animate={isInView ? { y: 0, opacity: 1 } : {}}
                             transition={{ duration: 0.5, delay: 1 }}
                         >
-                            <a href="/Join" className="capsule-btn w-full text-sm">
+                            <a href="https://chat.whatsapp.com/KCMrNnAQgBNBZaZ3WxorTm" target="_blank" className="capsule-btn w-full text-sm">
                                 <span className="btn-text flex-1 text-center">Join Our Community</span>
                                 <span className="btn-icon">
                                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

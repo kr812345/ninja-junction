@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { IoIosMenu } from "react-icons/io";
 import { IoCloseOutline } from "react-icons/io5";
 import { motion, AnimatePresence } from 'motion/react';
@@ -13,6 +13,8 @@ export default function Navbar() {
     const [selected, setSelection] = useState('');
     const [isVisible, setIsVisible] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const [hidden, setHidden] = useState(false);
+    const lastScrollY = useRef(0);
     const path = usePathname();
 
     const menus = [
@@ -31,9 +33,12 @@ export default function Navbar() {
 
     useEffect(() => {
         const handleScroll = () => {
-            setScrolled(window.scrollY > 50);
+            const currentY = window.scrollY;
+            setScrolled(currentY > 50);
+            setHidden(currentY > 100 && currentY > lastScrollY.current);
+            lastScrollY.current = currentY;
         };
-        window.addEventListener('scroll', handleScroll);
+        window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
@@ -54,9 +59,9 @@ export default function Navbar() {
             initial={{ y: -100 }}
             animate={{ y: 0 }}
             transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
-            className={`fixed w-full z-[10000] transition-all duration-500 ${
+            className={`fixed w-full z-[10000] transition-all duration-500 ${hidden ? '-translate-y-full' : 'translate-y-0'} ${
                 scrolled
-                    ? 'bg-[#1A1726]/90 backdrop-blur-xl border-b border-purple-500/5 shadow-sm'
+                    ? 'bg-white/35 backdrop-blur-3xl backdrop-saturate-150 border-b border-white/50 shadow-[0_8px_32px_rgba(79,70,229,0.08)]'
                     : 'bg-transparent'
             }`}
         >
@@ -104,7 +109,7 @@ export default function Navbar() {
 
                     {/* Right — Compact CTA */}
                     <div className="hidden md:flex items-center">
-                        <Link href="/Join" className="capsule-btn">
+                        <Link href="https://chat.whatsapp.com/KCMrNnAQgBNBZaZ3WxorTm" target="_blank" className="capsule-btn">
                             <span className="btn-text">Join Us</span>
                             <span className="btn-icon">
                                 <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -118,7 +123,7 @@ export default function Navbar() {
                     <div className="md:hidden">
                         <button
                             onClick={handleMenu}
-                            className="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 backdrop-blur-lg border border-white/8 text-[var(--color-text-primary)]"
+                            className="w-10 h-10 flex items-center justify-center rounded-full bg-black/5 backdrop-blur-lg border border-black/8 text-[var(--color-text-primary)]"
                         >
                             {isVisible
                                 ? <IoCloseOutline className="text-xl" />
@@ -137,7 +142,7 @@ export default function Navbar() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
                         transition={{ duration: 0.3 }}
-                        className="md:hidden fixed inset-0 top-16 bg-[#13111C]/95 backdrop-blur-2xl z-[9999]"
+                        className="md:hidden fixed inset-0 top-16 bg-[#F6F8FB]/95 backdrop-blur-2xl z-[9999]"
                         onClick={handleMenu}
                     >
                         <div className="flex flex-col items-center justify-center h-full gap-5 -mt-16">
@@ -168,7 +173,7 @@ export default function Navbar() {
                                 transition={{ delay: menus.length * 0.06, duration: 0.3 }}
                                 className="mt-3"
                             >
-                                <Link href="/Join" className="capsule-btn">
+                                <Link href="https://chat.whatsapp.com/KCMrNnAQgBNBZaZ3WxorTm" target="_blank" className="capsule-btn">
                                     <span className="btn-text">Join Us</span>
                                     <span className="btn-icon">
                                         <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">

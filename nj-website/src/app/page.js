@@ -1,5 +1,6 @@
 import Hero from "../Components/Hero";
 import Marquee from "../Components/Marquee";
+import ImageShowcase from "../Components/ImageShowcase";
 import CommunityMap from "../Components/CommunityMap";
 import EventCategories from "../Components/EventCategories";
 import CoreActions from "../Components/CoreActions";
@@ -11,6 +12,7 @@ export default function Home() {
       <div>
         <Hero />
         <Marquee />
+        <ImageShowcase />
         <CommunityMap />
         <EventCategories />
         <CoreActions />

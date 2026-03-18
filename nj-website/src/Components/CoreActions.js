@@ -7,9 +7,9 @@ export default function CoreActions() {
         {
             title: 'Join',
             subtitle: 'Become a community member',
-            description: 'Connect with like-minded students across Delhi colleges and start your journey.',
+            description: 'Connect with like-minded students across India and start your journey.',
             icon: '🥷',
-            link: '/Join',
+            link: 'https://chat.whatsapp.com/KCMrNnAQgBNBZaZ3WxorTm',
         },
         {
             title: 'Participate',
@@ -32,7 +32,7 @@ export default function CoreActions() {
     return (
         <section className="relative py-24 bg-[var(--color-surface)] overflow-hidden">
             {/* Background Effects */}
-            <div className="absolute top-0 left-1/3 w-[400px] h-[400px] bg-cyan-500/5 rounded-full blur-[100px]" />
+            <div className="absolute top-0 left-1/3 w-[400px] h-[400px] bg-indigo-500/8 rounded-full blur-[100px]" />
 
             <div className="max-w-6xl mx-auto px-6 lg:px-8">
                 {/* Section Heading — Bold condensed */}
@@ -72,7 +72,7 @@ export default function CoreActions() {
                                     className="relative glass-card p-8 cursor-pointer group h-full flex flex-col items-center text-center"
                                 >
                                     {/* Glow on hover */}
-                                    <div className="absolute inset-0 rounded-[var(--radius-card)] bg-gradient-to-br from-cyan-500/0 to-blue-500/0 group-hover:from-cyan-500/10 group-hover:to-blue-500/5 transition-all duration-500" />
+                                    <div className="absolute inset-0 rounded-[var(--radius-card)] bg-gradient-to-br from-indigo-500/0 to-cyan-500/0 group-hover:from-indigo-500/10 group-hover:to-cyan-500/5 transition-all duration-500" />
 
                                     {/* Icon */}
                                     <div className="relative mb-6 text-5xl">

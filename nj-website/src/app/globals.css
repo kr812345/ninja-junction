@@ -12,11 +12,25 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-inter);
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24'%3E%3Cpath fill='%234F46E5' stroke='%23fff' stroke-width='1' d='M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86a.5.5 0 0 1 .35-.15h6.87a.5.5 0 0 0 .35-.85L6.35 2.85a.5.5 0 0 0-.85.36z'/%3E%3C/svg%3E") 4 1, default;
 }
 
-img, svg {
+a, button, [role="button"], input[type="submit"], .capsule-btn, .cursor-pointer {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24'%3E%3Cpath fill='%234F46E5' stroke='%23fff' stroke-width='1' d='M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86a.5.5 0 0 1 .35-.15h6.87a.5.5 0 0 0 .35-.85L6.35 2.85a.5.5 0 0 0-.85.36z'/%3E%3C/svg%3E") 4 1, default;
+}
+
+img {
   -webkit-user-drag: none;
   user-select: none;
+  pointer-events: none;
+}
+
+svg {
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+a svg, button svg, .capsule-btn svg {
   pointer-events: none;
 }
 
@@ -51,36 +65,68 @@ img, svg {
 }
 */
 
+/* ==========================================
+   🔮 SAVED OBSIDIAN + LAVENDER PURPLE THEME
+   ==========================================
 @theme {
-  /* 🔮 Obsidian + Lavender Purple Theme */
   --color-primary: #A78BFA;
-  /* Soft purple — buttons, links, interactive */
   --color-primary-dark: #8B5CF6;
   --color-primary-light: #C4B5FD;
-
   --color-accent-pink: #34D399;
-  /* Emerald green accent */
   --color-accent-yellow: #FBBF24;
   --color-accent-red: #F87171;
-
   --color-text-primary: #EEEDF5;
-  /* Lavender white — headings */
   --color-text-secondary: #8B85A1;
-  /* Muted purple — body text */
-
   --color-border: #2A2640;
   --color-background: #13111C;
-  /* Deep purple-black — main bg */
   --color-background-alt: #1A1726;
-  /* Slightly lighter for alt sections */
   --color-surface: #1E1B2E;
-  /* Card/surface purple */
   --color-surface-light: #252238;
-
   --color-cta-bg: #A78BFA;
-  /* Purple button background */
   --color-cta-text: #13111C;
-  /* Dark button text */
+  --font-heading: var(--font-oswald);
+  --font-body: var(--font-inter);
+  --font-accent: var(--font-merriweather);
+  --radius-card: 24px;
+  --radius-button: 9999px;
+  --radius-card-sm: 16px;
+  --shadow-card: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 30px rgba(167, 139, 250, 0.2);
+  --shadow-glow-strong: 0 0 60px rgba(167, 139, 250, 0.35);
+}
+*/
+
+@theme {
+  /* ✨ Premium Student Light Theme */
+  --color-primary: #4F46E5;
+  /* Indigo — smart + tech vibe */
+  --color-primary-dark: #4338CA;
+  --color-primary-light: #818CF8;
+
+  --color-accent-pink: #06B6D4;
+  /* Cyan — fresh + modern */
+  --color-accent-yellow: #F59E0B;
+  /* Warm highlight for CTAs */
+  --color-accent-red: #EF4444;
+
+  --color-text-primary: #0F172A;
+  /* Almost black, but softer */
+  --color-text-secondary: #64748B;
+  /* Muted grey */
+
+  --color-border: #E2E8F0;
+  --color-background: #F6F8FB;
+  /* Soft off-white */
+  --color-background-alt: #EEF2FF;
+  /* Very subtle indigo tint */
+  --color-surface: #FFFFFF;
+  /* Card bg */
+  --color-surface-light: #F1F5F9;
+
+  --color-cta-bg: #4F46E5;
+  /* Indigo button background */
+  --color-cta-text: #FFFFFF;
+  /* White button text */
 
   /* ✍️ Fonts */
   --font-heading: var(--font-oswald);
@@ -88,14 +134,14 @@ img, svg {
   --font-accent: var(--font-merriweather);
 
   /* 🔘 Radius */
-  --radius-card: 24px;
+  --radius-card: 16px;
   --radius-button: 9999px;
-  --radius-card-sm: 16px;
+  --radius-card-sm: 12px;
 
-  /* 🌑 Shadows */
-  --shadow-card: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
-  --shadow-glow: 0 0 30px rgba(167, 139, 250, 0.2);
-  --shadow-glow-strong: 0 0 60px rgba(167, 139, 250, 0.35);
+  /* ☀️ Shadows — soft + premium */
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.05);
+  --shadow-glow: 0 0 30px rgba(79, 70, 229, 0.12);
+  --shadow-glow-strong: 0 0 60px rgba(79, 70, 229, 0.18);
 }
 
 /* ==========================================
@@ -127,8 +173,8 @@ img, svg {
   width: 0;
   padding: 0;
   overflow: hidden;
-  background: #8B5CF6;
-  color: #13111C;
+  background: #4338CA;
+  color: #FFFFFF;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -141,19 +187,19 @@ img, svg {
 
 .capsule-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(167, 139, 250, 0.35);
+  box-shadow: 0 8px 24px rgba(79, 70, 229, 0.25);
 }
 
 .capsule-btn:hover .btn-text {
-  background: #8B5CF6;
-  color: #EEEDF5;
+  background: #4338CA;
+  color: #FFFFFF;
 }
 
 .capsule-btn:hover .btn-icon {
   width: 36px;
   padding: 0.6rem 0;
   opacity: 1;
-  background: #7C3AED;
+  background: #3730A3;
 }
 
 /* Slightly bigger variant for hero CTA */
@@ -181,8 +227,8 @@ img, svg {
   position: relative;
   padding: 0.5rem 1.2rem;
   border-radius: 9999px;
-  background: rgba(167, 139, 250, 0.08);
-  border: 1px solid rgba(167, 139, 250, 0.12);
+  background: rgba(79, 70, 229, 0.06);
+  border: 1px solid rgba(79, 70, 229, 0.10);
   color: var(--color-text-primary);
   font-weight: 600;
   font-size: 0.72rem;
@@ -198,9 +244,9 @@ img, svg {
 }
 
 .nav-pill:hover {
-  background: rgba(167, 139, 250, 0.95);
-  color: #13111C;
-  border-color: rgba(167, 139, 250, 0.9);
+  background: rgba(79, 70, 229, 0.95);
+  color: #FFFFFF;
+  border-color: rgba(79, 70, 229, 0.9);
   transform: scale(1.04);
 }
 
@@ -209,9 +255,9 @@ img, svg {
 }
 
 .nav-pill.active {
-  background: rgba(167, 139, 250, 0.95);
-  border-color: rgba(167, 139, 250, 0.9);
-  color: #13111C;
+  background: rgba(79, 70, 229, 0.95);
+  border-color: rgba(79, 70, 229, 0.9);
+  color: #FFFFFF;
 }
 
 /* ==========================================
@@ -274,7 +320,7 @@ img, svg {
 
 .tilted-card:hover {
   transform: rotate(0deg) scale(1.05) translateY(-8px);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
   z-index: 10;
 }
 
@@ -301,19 +347,21 @@ img, svg {
 }
 
 /* ==========================================
-   🔮 GLASS CARD — obsidian purple theme
+   🔮 GLASS CARD — frosted white glass
    ========================================== */
 .glass-card {
-  background: rgba(30, 27, 46, 0.6);
+  background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(167, 139, 250, 0.08);
+  border: 1px solid rgba(79, 70, 229, 0.08);
   border-radius: var(--radius-card);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
 }
 
 .glass-card:hover {
-  background: rgba(30, 27, 46, 0.8);
-  border-color: rgba(167, 139, 250, 0.2);
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(79, 70, 229, 0.18);
+  box-shadow: 0 8px 30px rgba(79, 70, 229, 0.08);
 }
 
 /* ==========================================
@@ -329,11 +377,11 @@ img, svg {
 
 .hero-floating-icon img,
 .hero-floating-icon svg {
-  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.1));
 }
 
 /* ==========================================
-   🖱️ CUSTOM CURSOR DOT (MoMoney style)
+   🖱️ CUSTOM CURSOR DOT
    ========================================== */
 .cursor-dot {
   position: fixed;
@@ -343,7 +391,7 @@ img, svg {
   border-radius: 50%;
   pointer-events: none;
   z-index: 99999;
-  mix-blend-mode: difference;
+  mix-blend-mode: multiply;
   transition: transform 0.1s ease-out;
 }
 
@@ -352,11 +400,11 @@ img, svg {
    ========================================== */
 @layer utilities {
   .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-violet-300 to-purple-400;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 via-indigo-500 to-cyan-500;
   }
 
   .gradient-text-warm {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 via-green-300 to-emerald-400;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 via-cyan-500 to-indigo-500;
   }
 
   .animate-shimmer {
@@ -412,7 +460,7 @@ img, svg {
 }
 
 /* ==========================================
-   📱 SMOOTH SCROLLBAR for dark theme
+   📱 SMOOTH SCROLLBAR — light theme
    ========================================== */
 ::-webkit-scrollbar {
   width: 8px;
@@ -423,16 +471,16 @@ img, svg {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-surface-light);
+  background: #CBD5E1;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-primary-dark);
+  background: var(--color-primary);
 }
 
 /* Selection color */
 ::selection {
-  background: rgba(167, 139, 250, 0.3);
-  color: #fff;
+  background: rgba(79, 70, 229, 0.2);
+  color: #0F172A;
 }

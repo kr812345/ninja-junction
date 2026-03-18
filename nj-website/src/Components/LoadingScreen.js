@@ -25,8 +25,8 @@ export default function LoadingScreen({ children }) {
                         className="fixed inset-0 z-[9999] flex items-center justify-center bg-[var(--color-background)]"
                     >
                         {/* Background glow effects — cyan/blue theme */}
-                        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-cyan-500/15 rounded-full blur-[120px]" />
-                        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[120px]" />
+                        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-500/15 rounded-full blur-[120px]" />
+                        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[120px]" />
 
                         {/* Boom effect container */}
                         <div className="relative">
@@ -55,7 +55,7 @@ export default function LoadingScreen({ children }) {
                                     delay: 0.9,
                                     ease: "easeOut"
                                 }}
-                                className="absolute inset-0 -m-20 rounded-full border-4 border-cyan-300"
+                                className="absolute inset-0 -m-20 rounded-full border-4 border-indigo-300"
                             />
 
                             {/* Logo with boom animation */}
@@ -75,9 +75,9 @@ export default function LoadingScreen({ children }) {
                                 <motion.div
                                     animate={{
                                         boxShadow: [
-                                            '0 0 0px rgba(0, 212, 255, 0)',
-                                            '0 0 60px rgba(0, 212, 255, 0.8)',
-                                            '0 0 40px rgba(0, 212, 255, 0.3)'
+                                            '0 0 0px rgba(79, 70, 229, 0)',
+                                            '0 0 60px rgba(79, 70, 229, 0.5)',
+                                            '0 0 40px rgba(79, 70, 229, 0.2)'
                                         ]
                                     }}
                                     transition={{
@@ -85,7 +85,7 @@ export default function LoadingScreen({ children }) {
                                         delay: 0.8,
                                         repeat: 1
                                     }}
-                                    className="w-48 h-48 rounded-3xl bg-[var(--color-surface)]/80 backdrop-blur-xl border border-white/10 flex items-center justify-center p-6"
+                                    className="w-48 h-48 rounded-3xl bg-[var(--color-surface)]/80 backdrop-blur-xl border border-black/5 flex items-center justify-center p-6 shadow-lg"
                                 >
                                     <Image
                                         src="/logo-bg.svg"
@@ -113,7 +113,7 @@ export default function LoadingScreen({ children }) {
                                         delay: 0.8 + i * 0.05,
                                         ease: "easeOut"
                                     }}
-                                    className="absolute top-1/2 left-1/2 w-3 h-3 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full"
+                                    className="absolute top-1/2 left-1/2 w-3 h-3 bg-gradient-to-r from-indigo-400 to-cyan-500 rounded-full"
                                     style={{ transformOrigin: 'center' }}
                                 />
                             ))}
