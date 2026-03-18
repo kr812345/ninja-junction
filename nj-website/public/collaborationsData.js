@@ -1,0 +1,47 @@
+export const collaborations = [
+    {
+        id: 1,
+        name: "INVOOTECHNICA Global Private Limited",
+        image: null,
+        pill: "Technology Partner",
+        description: "Global technology solutions and innovation partner",
+        bgColor: "bg-blue-500",
+        logoText: "INVOOTECHNICA\nGLOBAL PRIVATE LIMITED",
+    },
+    {
+        id: 2,
+        name: "HLM Group of Institutions",
+        image: null,
+        pill: "Education Partner",
+        description: "Leading educational institution fostering innovation",
+        bgColor: "bg-blue-400",
+        logoText: "HLM Group of Institutions",
+    },
+    {
+        id: 3,
+        name: "TEDxSVC",
+        image: null,
+        pill: "Event Partner",
+        description: "Ideas worth spreading - Independent TEDx event at Shri Venkateswara College",
+        bgColor: "bg-blue-500",
+        logoText: "TEDx SVC",
+    },
+    {
+        id: 4,
+        name: "Madalasa Foundation",
+        image: null,
+        pill: "Sponsor",
+        description: "Non-profit organization promoting education and social development",
+        bgColor: "bg-orange-500",
+        logoText: "Madalasa\nFoundation",
+    },
+    {
+        id: 5,
+        name: "Tripgix",
+        image: null,
+        pill: "Travel Partner",
+        description: "Travel and tourism platform partner",
+        bgColor: "bg-blue-400",
+        logoText: "TRIPGIX",
+    }
+];

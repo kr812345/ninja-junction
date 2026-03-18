@@ -43,42 +43,67 @@ export default function Login() {
     };
 
     return (
-        <main className="bg-[var(--dark)] text-[var(--light)]">
-            <section className="flex items-center justify-center min-h-[100vh] px-4">
-                {/* <Image className='fixed -z-10 -rotate-[28deg] top-44 left-170 h-[650px] w-[500px]' src={'./login-graphic.svg'} alt='' width={120} height={120}/> */}
-                <motion.div 
-                    initial={{opacity: 0}}
-                    animate={{opacity: 1}}
-                    transition={{duration: 0.5}}
-                    className='fixed -z-100 not-sm:top-5 not-sm:left-54 top-[17%] left-[53%] bg-primary/40 not-sm:h-100 not-sm:w-90 h-80 w-80 rounded-full '></motion.div>
+        <main className="min-h-screen bg-[var(--color-background)] relative overflow-hidden flex items-center justify-center">
+            {/* Premium crystal grid background */}
+            <div className="absolute inset-0 z-0 pointer-events-none">
+                <div
+                    className="absolute inset-0 opacity-[0.12]"
+                    style={{
+                        backgroundImage: `
+                            linear-gradient(to right, #4F46E5 1px, transparent 1px),
+                            linear-gradient(to bottom, #4F46E5 1px, transparent 1px)
+                        `,
+                        backgroundSize: '30px 30px',
+                    }}
+                />
+                <div className="absolute top-[10%] right-[15%] w-[500px] h-[500px] bg-indigo-500/[0.12] rounded-full blur-[120px]" />
+                <div className="absolute bottom-[10%] left-[10%] w-[400px] h-[400px] bg-cyan-500/[0.10] rounded-full blur-[100px]" />
+                <div
+                    className="absolute inset-0"
+                    style={{
+                        background: 'radial-gradient(ellipse at center, transparent 40%, var(--color-background) 80%)',
+                    }}
+                />
+                <div
+                    className="absolute inset-0 opacity-[0.08]"
+                    style={{
+                        backgroundImage: 'radial-gradient(circle, #4F46E5 1px, transparent 1px)',
+                        backgroundSize: '20px 20px',
+                    }}
+                />
+            </div>
 
+            <section className="relative z-10 w-full px-4 flex justify-center">
                 <motion.div 
                     initial={{opacity: 0, y:-10}}
                     animate={{opacity: 1, y: 0}}
                     transition={{duration: 0.5}}
-                    className="border border-primary bg-primary/10 backdrop-blur-md text-black p-8 rounded-2xl shadow-lg w-full max-w-md">
-                    <h2 className="text-3xl text-primary font-bold mb-6 text-center gradient-text">Login</h2>
+                    className="bg-white/80 backdrop-blur-md p-8 sm:p-10 rounded-3xl shadow-2xl border border-black/5 w-full max-w-md">
+                    
+                    <h2 className="bold-heading text-4xl mb-8 text-center">LOGIN</h2>
+                    
                     <motion.form 
                         initial={{opacity: 0, y:-10}}
                         animate={{opacity: 1, y: 0}}
                         onSubmit={handleSubmit} 
-                        className="space-y-4">
+                        className="space-y-6">
                         <div>
-                            <label htmlFor="email" className="block mb-1 font-semibold">
-                                Email
+                            <label htmlFor="email" className="block text-sm font-semibold text-[var(--color-text-primary)] mb-2">
+                                Email Address
                             </label>
                             <input
                                 type="email"
                                 id="email"
                                 name="email"
                                 required
-                                className="w-full p-2 ring ring-primary/40 rounded-md input-focus focus:outline-primary"
+                                className="w-full p-3 lg:p-4 bg-white/50 backdrop-blur-sm border border-gray-200 rounded-xl focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent transition-all duration-200 hover:border-indigo-500/30 text-sm lg:text-base focus:outline-none text-[var(--color-text-primary)]"
                                 value={formData.email}
                                 onChange={handleChange}
+                                placeholder="name@example.com"
                             />
                         </div>
                         <div>
-                            <label htmlFor="password" className="block mb-1 font-semibold">
+                            <label htmlFor="password" className="block text-sm font-semibold text-[var(--color-text-primary)] mb-2">
                                 Password
                             </label>
                             <input
@@ -86,27 +111,34 @@ export default function Login() {
                                 id="password"
                                 name="password"
                                 required
-                                className="w-full p-2 ring ring-primary/40 rounded-md input-focus focus:outline-primary"
+                                className="w-full p-3 lg:p-4 bg-white/50 backdrop-blur-sm border border-gray-200 rounded-xl focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent transition-all duration-200 hover:border-indigo-500/30 text-sm lg:text-base focus:outline-none text-[var(--color-text-primary)]"
                                 value={formData.password}
                                 onChange={handleChange}
+                                placeholder="••••••••"
                             />
                         </div>
+                        
                         {error && (
-                            <p className="text-red-500 text-sm">{error}</p>
+                            <p className="text-red-500 text-sm font-medium">{error}</p>
                         )}
-                        <Button type="submit" onClick={handleSubmit} className="w-full h-10 mt-4 bg-primary hover:shadow-md hover:scale-101">
-                            Login
-                        </Button>
-                        <p className="text-center text-gray-600 mt-4">
+                        
+                        <button 
+                            type="submit" 
+                            onClick={handleSubmit} 
+                            className="w-full py-4 px-8 mt-2 bg-[var(--color-primary)] text-white font-bold uppercase tracking-wider rounded-xl shadow-lg hover:bg-[var(--color-primary-dark)] hover:-translate-y-1 hover:shadow-xl transition-all duration-300 outline-none"
+                        >
+                            Log In
+                        </button>
+                        
+                        <p className="text-center text-[var(--color-text-secondary)] mt-6 text-sm">
                             Don't have an account?{' '}
-                            <Link href="/Signup" className="text-primary hover:text-cyan-600">
+                            <Link href="/Signup" className="text-[var(--color-primary)] font-bold hover:underline transition-all">
                                 Sign up
                             </Link>
                         </p>
                     </motion.form>
                 </motion.div>
             </section>
-            {/* <Toaster position='top-center' reverseOrder={false}/> */}
         </main>
     );
 }

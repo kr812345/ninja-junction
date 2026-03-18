@@ -6,7 +6,7 @@ export default function ScrollNavigator({children}) {
     const pathname = usePathname();
     const router = useRouter();
 
-    const routes = ['/', '/Projects', '/Events', '/Contact', '/About'];
+    const routes = ['/', '/Events', '/Collaborations', '/About', '/Contact'];
 
     useEffect(()=>{
         const handleScroll = (e) => {

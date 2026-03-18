@@ -20,8 +20,9 @@ export default function Navbar() {
     const menus = [
         { name: 'Home', link: '/' },
         { name: 'Events', link: '/Events' },
-        { name: 'Contact', link: '/Contact' },
+        { name: 'Collabs', link: '/Collaborations' },
         { name: 'About', link: '/About' },
+        { name: 'Contact', link: '/Contact' },
     ];
 
     useEffect(() => {
