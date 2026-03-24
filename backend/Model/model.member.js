@@ -42,12 +42,24 @@ const memberSchema = new mongoose.Schema({
   github: {
     type: String,
     trim: true,
-    match: [/^https?:\/\/github\.com\/[A-z0-9_-]+$/, 'Please enter a valid GitHub profile URL']
+    match: [/^https?:\/\/(?:www\.)?github\.com\/[A-z0-9_-]+\/?$/, 'Please enter a valid GitHub profile URL']
   },
   linkedin: {
     type: String,
     trim: true,
-    match: [/^https?:\/\/www\.linkedin\.com\/in\/[A-z0-9_-]+\/?$/, 'Please enter a valid LinkedIn profile URL']
+    match: [/^https?:\/\/(?:www\.)?linkedin\.com\/in\/[A-z0-9_-]+\/?$/, 'Please enter a valid LinkedIn profile URL']
+  },
+  location: {
+    city: {
+      type: String,
+      required: [true, 'City is required'],
+      trim: true
+    },
+    country: {
+      type: String,
+      required: [true, 'Country is required'],
+      trim: true
+    }
   },
   reason: {
     type: String,
@@ -64,7 +76,6 @@ const memberSchema = new mongoose.Schema({
   timestamps: true
 });
 
-memberSchema.index({ email: 1 });
 memberSchema.index({ status: 1 });
 
 const Member = mongoose.model('Member', memberSchema);

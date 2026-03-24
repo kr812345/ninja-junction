@@ -1,4 +1,4 @@
-const BASE_URL = `${process.env.NEXT_PUBLIC_API_URL}/api/members`;
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL ? `${process.env.NEXT_PUBLIC_API_URL}/members` : 'http://localhost:3001/api/members';
 
 /**
  * Submits a new membership application.
@@ -13,7 +13,12 @@ export const submitApplication = async (applicationData) => {
     },
     body: JSON.stringify(applicationData),
   });
-  return response.json();
+  const data = await response.json();
+  if (!response.ok) {
+    const errorMsg = data.errors ? `${data.message}: ${data.errors.join(', ')}` : data.message;
+    throw new Error(errorMsg || 'Operation failed');
+  }
+  return data;
 };
 
 /**

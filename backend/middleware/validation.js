@@ -210,7 +210,7 @@ export const validateQueryParams = (req, res, next) => {
 
 // Validate member creation data
 export const validateMemberCreation = (req, res, next) => {
-  const { name, email, university, program, year, skills, interests, github, linkedin, reason } = req.body;
+  const { name, email, university, program, year, location, skills, interests, github, linkedin, reason } = req.body;
   const errors = [];
 
   // Required fields
@@ -219,11 +219,13 @@ export const validateMemberCreation = (req, res, next) => {
   if (!university || typeof university !== 'string' || university.trim().length === 0) errors.push('University/College is required.');
   if (!program || typeof program !== 'string' || program.trim().length === 0) errors.push('Program is required.');
   if (!year || typeof year !== 'string' || year.trim().length === 0) errors.push('Year is required.');
+  if (!location || !location.city || typeof location.city !== 'string' || location.city.trim().length === 0) errors.push('City is required.');
+  if (!location || !location.country || typeof location.country !== 'string' || location.country.trim().length === 0) errors.push('Country is required.');
   if (!reason || typeof reason !== 'string' || reason.trim().length === 0) errors.push('Reason to join is required.');
 
   // Optional fields validation
-  if (github && !/^https?:\/\/(?:www\.)?github\.com\/[A-z0-9_-]+$/.test(github)) errors.push('Invalid GitHub URL.');
-  if (linkedin && !/^https?:\/\/(?:www\.)?linkedin\.com\/in\/[A-z0-9_-]+\/?$/.test(linkedin)) errors.push('Invalid LinkedIn URL.');
+  if (github && !/^https?:\/\/(?:www\.)?github\.com\/[A-z0-9_-]+\/?$/.test(github.trim())) errors.push('Invalid GitHub URL.');
+  if (linkedin && !/^https?:\/\/(?:www\.)?linkedin\.com\/in\/[A-z0-9_-]+\/?$/.test(linkedin.trim())) errors.push('Invalid LinkedIn URL.');
 
   if (errors.length > 0) {
     return res.status(400).json({ success: false, message: 'Validation failed', errors });
@@ -235,6 +237,10 @@ export const validateMemberCreation = (req, res, next) => {
   req.body.university = university.trim();
   req.body.program = program.trim();
   req.body.year = year.trim();
+  req.body.location = {
+    city: location.city.trim(),
+    country: location.country.trim()
+  };
   req.body.reason = reason.trim();
   if (skills) req.body.skills = skills.trim();
   if (interests) req.body.interests = interests.trim();
@@ -255,6 +261,52 @@ export const validateMemberStatusUpdate = (req, res, next) => {
       message: 'Validation failed', 
       errors: [`Status must be one of: ${validStatuses.join(', ')}`]
     });
+  }
+
+  next();
+};
+
+// Validate event creation data
+export const validateEventCreation = (req, res, next) => {
+  const { name, description, image, sponsor, timestamp } = req.body;
+  const errors = [];
+
+  if (!name || typeof name !== 'string' || name.trim().length === 0) errors.push('Name is required.');
+  if (!description || typeof description !== 'string' || description.trim().length === 0) errors.push('Description is required.');
+  if (!image || typeof image !== 'string' || image.trim().length === 0) errors.push('Image is required.');
+  if (!timestamp || isNaN(Date.parse(timestamp))) errors.push('A valid timestamp is required.');
+
+  if (errors.length > 0) return res.status(400).json({ success: false, message: 'Validation failed', errors });
+
+  req.body.name = name.trim();
+  req.body.description = description.trim();
+  req.body.image = image.trim();
+  if (sponsor) req.body.sponsor = sponsor.trim();
+
+  next();
+};
+
+// Validate event update data
+export const validateEventUpdate = (req, res, next) => {
+  const { name, description, image, sponsor, timestamp } = req.body;
+  
+  if (name !== undefined) {
+    if (typeof name !== 'string' || name.trim().length === 0) return res.status(400).json({ success: false, errors: ['Name cannot be empty.'] });
+    req.body.name = name.trim();
+  }
+  if (description !== undefined) {
+    if (typeof description !== 'string' || description.trim().length === 0) return res.status(400).json({ success: false, errors: ['Description cannot be empty.'] });
+    req.body.description = description.trim();
+  }
+  if (image !== undefined) {
+    if (typeof image !== 'string' || image.trim().length === 0) return res.status(400).json({ success: false, errors: ['Image cannot be empty.'] });
+    req.body.image = image.trim();
+  }
+  if (timestamp !== undefined) {
+     if (isNaN(Date.parse(timestamp))) return res.status(400).json({ success: false, errors: ['Invalid timestamp.'] });
+  }
+  if (sponsor !== undefined && typeof sponsor === 'string') {
+    req.body.sponsor = sponsor.trim();
   }
 
   next();

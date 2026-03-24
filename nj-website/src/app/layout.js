@@ -2,7 +2,6 @@ import { Inter, Merriweather, Oswald } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/Components/Navbar";
 import ScrollNavigator from "@/Components/ScrollNavigator";
-import LoadingScreen from "@/Components/LoadingScreen";
 import CursorTrail from "@/Components/CursorTrail";
 import { Toaster } from "react-hot-toast";
 
@@ -38,15 +37,14 @@ export default function RootLayout({ children }) {
         suppressHydrationWarning
         className={`${inter.variable} ${merriweather.variable} ${oswald.variable} antialiased font-sans`}
       >
-        <LoadingScreen>
-          <CursorTrail />
-          <Navbar />
-          <ScrollNavigator>
-            {/* <PageTransition> */}
-            {children}
-            {/* </PageTransition> */}
-          </ScrollNavigator>
-        </LoadingScreen>
+        <Toaster position="top-right" />
+        <CursorTrail />
+        <Navbar />
+        <ScrollNavigator>
+          {/* <PageTransition> */}
+          {children}
+          {/* </PageTransition> */}
+        </ScrollNavigator>
       </body>
     </html>
   );

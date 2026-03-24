@@ -12,6 +12,8 @@ export default function Join() {
     university: '',
     program: '',
     year: '',
+    city: '',
+    country: '',
     skills: '',
     interests: '',
     github: '',
@@ -30,26 +32,31 @@ export default function Join() {
     e.preventDefault()
     setSubmitting(true)
     try {
-      const res = await submitApplication(formData)
-
-      if (res.success === false) {
-        // Handle validation errors from the backend
-        const errorMessage = res.errors ? res.errors.join(', ') : res.message
-        throw new Error(errorMessage)
+      const payload = {
+        name: formData.name,
+        email: formData.email,
+        university: formData.university,
+        program: formData.program,
+        year: formData.year,
+        skills: formData.skills,
+        interests: formData.interests,
+        reason: formData.reason,
+        location: {
+           city: formData.city,
+           country: formData.country,
+        }
       }
+
+      if (formData.github?.trim()) payload.github = formData.github.trim()
+      if (formData.linkedin?.trim()) payload.linkedin = formData.linkedin.trim()
+
+      const res = await submitApplication(payload)
 
       toast.success(res?.message || 'Application submitted! We will get back to you soon.')
       setFormData({
-        name: '',
-        email: '',
-        university: '',
-        program: '',
-        year: '',
-        skills: '',
-        interests: '',
-        github: '',
-        linkedin: '',
-        reason: ''
+        name: '', email: '', university: '', program: '', year: '', 
+        city: '', country: '', skills: '', interests: '', 
+        github: '', linkedin: '', reason: ''
       })
     } catch (err) {
       toast.error(err?.message || 'Failed to submit. Please try again later.')
@@ -114,7 +121,7 @@ export default function Join() {
           <div className="bg-white/80 backdrop-blur-md p-6 lg:p-8 rounded-3xl shadow-xl border border-black/5">
             <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
               <div className="col-span-1">
-                <label className="block text-sm font-semibold text-[var(--color-text-primary)] mb-2">Full Name</label>
+                <label className="block text-sm font-semibold text-[var(--color-text-primary)] mb-2">Full Name *</label>
                 <input
                   type="text"
                   name="name"
@@ -127,7 +134,7 @@ export default function Join() {
               </div>
 
               <div className="col-span-1">
-                <label className="block text-sm font-semibold text-[var(--color-text-primary)] mb-2">Email</label>
+                <label className="block text-sm font-semibold text-[var(--color-text-primary)] mb-2">Email *</label>
                 <input
                   type="email"
                   name="email"
@@ -139,8 +146,8 @@ export default function Join() {
                 />
               </div>
 
-              <div className="col-span-1">
-                <label className="block text-sm font-semibold text-[var(--color-text-primary)] mb-2">University / College</label>
+              <div className="md:col-span-2">
+                <label className="block text-sm font-semibold text-[var(--color-text-primary)] mb-2">University / College *</label>
                 <input
                   type="text"
                   name="university"
@@ -153,7 +160,7 @@ export default function Join() {
               </div>
 
               <div className="col-span-1">
-                <label className="block text-sm font-semibold text-[var(--color-text-primary)] mb-2">Program</label>
+                <label className="block text-sm font-semibold text-[var(--color-text-primary)] mb-2">Program *</label>
                 <input
                   type="text"
                   name="program"
@@ -166,7 +173,7 @@ export default function Join() {
               </div>
 
               <div className="col-span-1">
-                <label className="block text-sm font-semibold text-[var(--color-text-primary)] mb-2">Year</label>
+                <label className="block text-sm font-semibold text-[var(--color-text-primary)] mb-2">Year *</label>
                 <input
                   type="text"
                   name="year"
@@ -175,6 +182,32 @@ export default function Join() {
                   required
                   className="w-full p-3 lg:p-4 bg-white/50 backdrop-blur-sm border border-gray-200 rounded-xl focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent transition-all duration-200 hover:border-indigo-500/30 text-sm lg:text-base focus:outline-none"
                   placeholder="e.g. 2nd year"
+                />
+              </div>
+
+              <div className="col-span-1">
+                <label className="block text-sm font-semibold text-[var(--color-text-primary)] mb-2">City *</label>
+                <input
+                  type="text"
+                  name="city"
+                  value={formData.city}
+                  onChange={handleChange}
+                  required
+                  className="w-full p-3 lg:p-4 bg-white/50 backdrop-blur-sm border border-gray-200 rounded-xl focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent transition-all duration-200 hover:border-indigo-500/30 text-sm lg:text-base focus:outline-none"
+                  placeholder="e.g. Mumbai"
+                />
+              </div>
+
+              <div className="col-span-1">
+                <label className="block text-sm font-semibold text-[var(--color-text-primary)] mb-2">Country *</label>
+                <input
+                  type="text"
+                  name="country"
+                  value={formData.country}
+                  onChange={handleChange}
+                  required
+                  className="w-full p-3 lg:p-4 bg-white/50 backdrop-blur-sm border border-gray-200 rounded-xl focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent transition-all duration-200 hover:border-indigo-500/30 text-sm lg:text-base focus:outline-none"
+                  placeholder="e.g. India"
                 />
               </div>
 
@@ -190,7 +223,7 @@ export default function Join() {
                 />
               </div>
 
-              <div className="md:col-span-2">
+              <div className="col-span-1">
                 <label className="block text-sm font-semibold text-[var(--color-text-primary)] mb-2">Interests</label>
                 <input
                   type="text"
@@ -198,36 +231,36 @@ export default function Join() {
                   value={formData.interests}
                   onChange={handleChange}
                   className="w-full p-3 lg:p-4 bg-white/50 backdrop-blur-sm border border-gray-200 rounded-xl focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent transition-all duration-200 hover:border-indigo-500/30 text-sm lg:text-base focus:outline-none"
-                  placeholder="Hackathons, Open Source, Startups, AI, etc."
+                  placeholder="Hackathons, AI, etc."
                 />
               </div>
 
               <div className="col-span-1">
-                <label className="block text-sm font-semibold text-[var(--color-text-primary)] mb-2">GitHub</label>
+                <label className="block text-sm font-semibold text-[var(--color-text-primary)] mb-2">GitHub URL</label>
                 <input
                   type="url"
                   name="github"
                   value={formData.github}
                   onChange={handleChange}
                   className="w-full p-3 lg:p-4 bg-white/50 backdrop-blur-sm border border-gray-200 rounded-xl focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent transition-all duration-200 hover:border-indigo-500/30 text-sm lg:text-base focus:outline-none"
-                  placeholder="https://github.com/yourid"
+                  placeholder="https://github.com/..."
                 />
               </div>
 
               <div className="col-span-1">
-                <label className="block text-sm font-semibold text-[var(--color-text-primary)] mb-2">LinkedIn</label>
+                <label className="block text-sm font-semibold text-[var(--color-text-primary)] mb-2">LinkedIn URL</label>
                 <input
                   type="url"
                   name="linkedin"
                   value={formData.linkedin}
                   onChange={handleChange}
                   className="w-full p-3 lg:p-4 bg-white/50 backdrop-blur-sm border border-gray-200 rounded-xl focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent transition-all duration-200 hover:border-indigo-500/30 text-sm lg:text-base focus:outline-none"
-                  placeholder="https://linkedin.com/in/yourid"
+                  placeholder="https://linkedin.com/in/..."
                 />
               </div>
 
               <div className="md:col-span-2">
-                <label className="block text-sm font-semibold text-[var(--color-text-primary)] mb-2">Why do you want to join?</label>
+                <label className="block text-sm font-semibold text-[var(--color-text-primary)] mb-2">Why do you want to join? *</label>
                 <textarea
                   name="reason"
                   value={formData.reason}
@@ -254,9 +287,6 @@ export default function Join() {
           </div>
         </motion.div>
       </div>
-
-      {/* <Toaster position="top-center" reverseOrder={false} /> */}
     </div>
   )
 }
-

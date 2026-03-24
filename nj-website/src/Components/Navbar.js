@@ -23,6 +23,7 @@ export default function Navbar() {
         { name: 'Collabs', link: '/Collaborations' },
         { name: 'About', link: '/About' },
         { name: 'Contact', link: '/Contact' },
+        { name: '•••', link: '/login' },
     ];
 
     useEffect(() => {
@@ -55,6 +56,10 @@ export default function Navbar() {
         setIsVisible(false);
     };
 
+    if (path === '/login' || path?.startsWith('/dashboard')) {
+        return null;
+    }
+
     return (
         <motion.nav
             initial={{ y: -100 }}
@@ -81,9 +86,6 @@ export default function Navbar() {
                                 {menu.name}
                             </Link>
                         ))}
-                        <button className="nav-pill flex items-center justify-center !px-2.5 !py-1.5">
-                            <span className="text-xs tracking-[0.15em]">•••</span>
-                        </button>
                     </div>
 
                     {/* Center — Logo */}
