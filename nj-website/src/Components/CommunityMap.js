@@ -199,10 +199,13 @@ export default function CommunityMap() {
                         className="lg:col-span-2 space-y-6"
                     >
                         {/* Member Count */}
-                        <div className="glass-card p-8 text-center">
+                        <div className="glass-card p-8 text-center bg-white/40 backdrop-blur-md">
                             <motion.div
                                 className="text-6xl lg:text-7xl font-bold text-[var(--color-primary)]"
                                 style={{ fontFamily: 'var(--font-oswald)' }}
+                                initial={{ scale: 0.5, opacity: 0 }}
+                                whileInView={{ scale: 1, opacity: 1 }}
+                                transition={{ type: "spring", stiffness: 100, delay: 0.5 }}
                             >
                                 {count}+
                             </motion.div>

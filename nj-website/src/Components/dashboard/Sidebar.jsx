@@ -2,7 +2,8 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion } from 'motion/react';
-import { FiHome, FiUsers, FiCalendar, FiMessageSquare, FiSettings } from 'react-icons/fi';
+import { FiHome, FiUsers, FiCalendar, FiMessageSquare, FiSettings, FiX } from 'react-icons/fi';
+import { AnimatePresence } from 'motion/react';
 
 const navItems = [
   { name: 'Overview', href: '/dashboard', icon: FiHome },
@@ -11,25 +12,30 @@ const navItems = [
   { name: 'Contacts', href: '/dashboard/contacts', icon: FiMessageSquare },
 ];
 
-export default function Sidebar() {
+export default function Sidebar({ isOpen, onClose }) {
   const pathname = usePathname();
 
-  return (
-    <div className="w-64 h-screen bg-[#070b14] border-r border-white/10 flex flex-col p-6 sticky top-0 hidden md:flex z-50">
-      <div className="mb-12 flex items-center gap-3">
-        <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-indigo-500 to-purple-500 flex items-center justify-center font-bold text-white shadow-lg">
-          N
+  const SidebarContent = (
+    <div className="w-64 h-full bg-[#070b14] flex flex-col p-6 shadow-2xl md:shadow-none">
+      <div className="mb-12 flex items-center justify-between gap-3">
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-indigo-500 to-purple-500 flex items-center justify-center font-bold text-white shadow-lg">
+            N
+          </div>
+          <span className="text-xl font-bold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
+            Ninja Admin
+          </span>
         </div>
-        <span className="text-xl font-bold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
-          Ninja Admin
-        </span>
+        <button onClick={onClose} className="md:hidden text-gray-400 hover:text-white p-1">
+          <FiX className="text-xl" />
+        </button>
       </div>
 
       <nav className="flex-1 space-y-2">
         {navItems.map((item) => {
           const isActive = pathname === item.href;
           return (
-            <Link key={item.name} href={item.href}>
+            <Link key={item.name} href={item.href} onClick={onClose}>
               <div
                 className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all relative overflow-hidden group ${
                   isActive ? 'text-white' : 'text-gray-400 hover:text-white'
@@ -60,5 +66,38 @@ export default function Sidebar() {
         </button>
       </div>
     </div>
+  );
+
+  return (
+    <>
+      {/* Desktop Sidebar */}
+      <aside className="hidden md:flex sticky top-0 h-screen border-r border-white/10 z-50">
+        {SidebarContent}
+      </aside>
+
+      {/* Mobile Sidebar (Drawer) */}
+      <AnimatePresence>
+        {isOpen && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={onClose}
+              className="md:hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-[100]"
+            />
+            <motion.div
+              initial={{ x: '-100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '-100%' }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              className="md:hidden fixed inset-y-0 left-0 z-[101]"
+            >
+              {SidebarContent}
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+    </>
   );
 }

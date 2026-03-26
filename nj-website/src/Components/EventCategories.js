@@ -88,14 +88,14 @@ export default function EventCategories() {
 
                 {/* LAYER 2: Cards — slide in from right, covering the heading */}
                 <motion.div
-                    className="absolute inset-0 flex items-center justify-center z-[5] px-6"
+                    className="absolute inset-0 flex items-center justify-start md:justify-center z-[5] px-4 md:px-6 pb-24 md:pb-0 overflow-x-auto hide-scrollbar"
                     style={{ x: cardsX, opacity: cardsOpacity }}
                 >
-                    <div className="flex flex-wrap lg:flex-nowrap justify-center gap-6 items-center">
+                    <div className="flex flex-nowrap md:flex-wrap lg:flex-nowrap justify-start md:justify-center gap-6 items-center snap-x snap-mandatory px-8 md:px-0">
                         {categories.map((category, index) => (
                             <motion.div
                                 key={category.title}
-                                className="w-full sm:w-[280px] lg:w-[300px] flex-shrink-0"
+                                className="w-[85vw] sm:w-[280px] lg:w-[300px] flex-shrink-0 snap-center"
                                 style={{ rotate: cardRotations[index] }}
                             >
                                 <Link href={category.link}>
@@ -139,7 +139,7 @@ export default function EventCategories() {
 
                 {/* LAYER 3: Bottom CTA — appears after cards settle */}
                 <motion.div
-                    className="absolute bottom-12 left-0 right-0 z-[10] text-center"
+                    className="absolute bottom-8 md:bottom-12 left-0 right-0 z-[10] text-center"
                     style={{ opacity: ctaOpacity, y: ctaY }}
                 >
                     <Link href="/Events" className="capsule-btn text-sm mx-auto inline-flex">

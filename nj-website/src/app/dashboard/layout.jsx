@@ -5,6 +5,7 @@ import Sidebar from '../../Components/dashboard/Sidebar';
 import TopNav from '../../Components/dashboard/TopNav';
 
 export default function DashboardLayout({ children }) {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const router = useRouter();
 
@@ -21,9 +22,9 @@ export default function DashboardLayout({ children }) {
 
   return (
     <div className="flex min-h-screen bg-[#02050a] text-white selection:bg-indigo-500/30 font-sans">
-      <Sidebar />
+      <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
       <div className="flex-1 flex flex-col relative overflow-hidden">
-        <TopNav />
+        <TopNav onMenuClick={() => setIsSidebarOpen(true)} />
         {/* Glow effect for main content area */}
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-600/10 rounded-full blur-[150px] pointer-events-none -translate-y-1/2 translate-x-1/3" />
         <main className="flex-1 p-6 md:p-8 overflow-y-auto relative z-10 scrollbar-hide">

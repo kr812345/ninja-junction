@@ -3,7 +3,7 @@ import { useRouter } from 'next/navigation';
 import { FiLogOut, FiBell, FiSearch, FiMenu } from 'react-icons/fi';
 import toast from 'react-hot-toast';
 
-export default function TopNav() {
+export default function TopNav({ onMenuClick }) {
   const router = useRouter();
 
   const handleLogout = () => {
@@ -16,7 +16,10 @@ export default function TopNav() {
   return (
     <header className="h-20 bg-[#070b14]/80 backdrop-blur-xl border-b border-white/10 flex items-center justify-between px-6 md:px-8 sticky top-0 z-40">
       <div className="flex items-center gap-4 flex-1">
-        <button className="md:hidden text-gray-400 hover:text-white p-2">
+        <button 
+          onClick={onMenuClick}
+          className="md:hidden text-gray-400 hover:text-white p-2 hover:bg-white/5 rounded-lg transition-colors"
+        >
            <FiMenu className="text-2xl" />
         </button>
         <div className="relative w-full max-w-sm hidden md:block">

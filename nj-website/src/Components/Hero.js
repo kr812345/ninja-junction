@@ -157,10 +157,34 @@ export default function Hero() {
                     }}
                 />
 
-                {/* Ambient gradient orbs */}
-                <div className="absolute top-[10%] right-[15%] w-[500px] h-[500px] bg-indigo-500/[0.12] rounded-full blur-[120px]" />
-                <div className="absolute bottom-[10%] left-[10%] w-[400px] h-[400px] bg-cyan-500/[0.10] rounded-full blur-[100px]" />
-                <div className="absolute top-[40%] left-[40%] w-[300px] h-[300px] bg-indigo-400/[0.08] rounded-full blur-[80px]" />
+                {/* Ambient gradient orbs (Parallax) */}
+                <motion.div 
+                    className="absolute top-[10%] right-[15%] w-[500px] h-[500px] bg-indigo-500/[0.12] rounded-full blur-[120px]" 
+                    animate={{ 
+                        x: [0, 30, 0],
+                        y: [0, -30, 0],
+                        scale: [1, 1.1, 1]
+                    }}
+                    transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+                />
+                <motion.div 
+                    className="absolute bottom-[10%] left-[10%] w-[400px] h-[400px] bg-cyan-500/[0.10] rounded-full blur-[100px]" 
+                    animate={{ 
+                        x: [0, -40, 0],
+                        y: [0, 20, 0],
+                        scale: [1, 1.2, 1]
+                    }}
+                    transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+                />
+                <motion.div 
+                    className="absolute top-[40%] left-[40%] w-[300px] h-[300px] bg-indigo-400/[0.08] rounded-full blur-[80px]" 
+                    animate={{ 
+                        x: [20, -20, 20],
+                        y: [10, -10, 10],
+                        opacity: [0.6, 1, 0.6]
+                    }}
+                    transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                />
 
                 {/* Radial vignette — fades grid at edges */}
                 <div
@@ -191,16 +215,20 @@ export default function Hero() {
                     <div className="relative mb-6 w-full">
 
                         {/* BACK LAYER (z-1): First line of heading */}
-                        <motion.div
-                            className="relative z-[1]"
-                            initial={{ scale: 0.9, opacity: 0 }}
-                            animate={{ scale: 1, opacity: 1 }}
-                            transition={{ duration: 0.7, delay: 0.2 }}
-                        >
-                            <h1 className="bold-heading-xl">
+                        <div className="relative z-[1] overflow-hidden py-2">
+                             <motion.h1 
+                                className="bold-heading-xl"
+                                variants={{
+                                    hidden: { y: "100%" },
+                                    visible: { y: 0 }
+                                }}
+                                initial="hidden"
+                                animate="visible"
+                                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+                            >
                                 ONE PLATFORM
-                            </h1>
-                        </motion.div>
+                            </motion.h1>
+                        </div>
 
                         {/* MIDDLE LAYER (z-15): Floating icons sit here ABOVE heading lines */}
                         <div className="absolute inset-0 z-[15] pointer-events-none">
@@ -216,7 +244,7 @@ export default function Hero() {
 
                         {/* Hero image — also in middle layer */}
                         <motion.div
-                            className="relative z-[5] flex justify-center -mt-10 mb-[-3.5rem] md:-mt-14 md:mb-[-5.5rem]"
+                            className="relative z-[5] flex justify-center -mt-8 mb-[-2.5rem] md:-mt-14 md:mb-[-5.5rem]"
                             initial={{ rotate: -10, scale: 0 }}
                             animate={{ rotate: -5, scale: 1 }}
                             transition={{ duration: 0.6, delay: 0.5, type: "spring" }}
@@ -226,21 +254,25 @@ export default function Hero() {
                                 alt="Tech illustration"
                                 width={280}
                                 height={160}
-                                className="rounded-xl object-cover w-[180px] h-[100px] md:w-[280px] md:h-[160px] shadow-lg shadow-black/10"
+                                className="rounded-xl object-cover w-[140px] h-[80px] md:w-[280px] md:h-[160px] shadow-lg shadow-black/10"
                             />
                         </motion.div>
 
                         {/* FRONT LAYER (z-10): Second line of heading — on top of images */}
-                        <motion.div
-                            className="relative z-[10]"
-                            initial={{ scale: 0.9, opacity: 0 }}
-                            animate={{ scale: 1, opacity: 1 }}
-                            transition={{ duration: 0.7, delay: 0.3 }}
-                        >
-                            <h2 className="bold-heading-xl">
+                        <div className="relative z-[10] overflow-hidden py-2">
+                            <motion.h2 
+                                className="bold-heading-xl"
+                                variants={{
+                                    hidden: { y: "-100%" },
+                                    visible: { y: 0 }
+                                }}
+                                initial="hidden"
+                                animate="visible"
+                                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
+                            >
                                 FOR STUDENTS
-                            </h2>
-                        </motion.div>
+                            </motion.h2>
+                        </div>
                     </div>
 
                     {/* Subtitle (z-15) — clean sans-serif */}

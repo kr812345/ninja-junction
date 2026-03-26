@@ -1,4 +1,5 @@
 'use client';
+import { motion } from 'motion/react';
 
 export default function Marquee() {
     const items = [
@@ -11,8 +12,16 @@ export default function Marquee() {
 
     return (
         <section className="relative py-6 bg-[var(--color-surface)] overflow-hidden border-y border-white/5">
-            <div className="marquee-container">
-                <div className="marquee-track">
+            <div className="flex whitespace-nowrap overflow-hidden">
+                <motion.div 
+                    className="flex shrink-0 min-w-full"
+                    animate={{ x: [0, "-50%"] }}
+                    transition={{
+                        duration: 25,
+                        repeat: Infinity,
+                        ease: "linear"
+                    }}
+                >
                     {track.map((item, i) => (
                         <span
                             key={i}
@@ -27,7 +36,7 @@ export default function Marquee() {
                             <span className="text-[var(--color-accent-pink)] text-2xl">✦</span>
                         </span>
                     ))}
-                </div>
+                </motion.div>
             </div>
         </section>
     );

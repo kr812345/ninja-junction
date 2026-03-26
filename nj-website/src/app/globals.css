@@ -484,3 +484,11 @@ a svg, button svg, .capsule-btn svg {
   background: rgba(79, 70, 229, 0.2);
   color: #0F172A;
 }
+
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}

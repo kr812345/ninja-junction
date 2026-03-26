@@ -4,6 +4,7 @@ import Navbar from "@/Components/Navbar";
 import ScrollNavigator from "@/Components/ScrollNavigator";
 import CursorTrail from "@/Components/CursorTrail";
 import { Toaster } from "react-hot-toast";
+import { ScrollProgress, Noise } from "@/Components/utils/ClientAtmosphere";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -25,6 +26,7 @@ const oswald = Oswald({
   display: "swap",
 });
 
+// Metadata remains here
 export const metadata = {
   title: "Ninja Junction",
   description: "Ninja Junction is a tech community which collaborates with companies and govt. agencies for tech and research projects.",
@@ -37,13 +39,13 @@ export default function RootLayout({ children }) {
         suppressHydrationWarning
         className={`${inter.variable} ${merriweather.variable} ${oswald.variable} antialiased font-sans`}
       >
+        <ScrollProgress />
+        <Noise />
         <Toaster position="top-right" />
         <CursorTrail />
         <Navbar />
         <ScrollNavigator>
-          {/* <PageTransition> */}
           {children}
-          {/* </PageTransition> */}
         </ScrollNavigator>
       </body>
     </html>
